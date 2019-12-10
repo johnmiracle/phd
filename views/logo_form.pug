@@ -1,0 +1,150 @@
+extends ./layout/mainlayout
+include ./mixins/_flash-messages
+
+
+block content
+    section.blk_2
+      .container-fluid.blk-text
+        h2
+          | Logo Design and Brand Identity
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aspernatur commodi at ex impedit aut aliquid nisi quasi repellendus reiciendis?
+        span FOR AS LOW AS #29,000.00 
+        br
+        br
+        br
+        a.link(href='#logo') Get Started
+    //
+      --------------------------
+      ------------------------------
+      -------Block 2 Ends HERE------
+      ------------------------------
+      ---------------------------
+    //
+      --------------------------
+      ------------------------------
+      -----Block 3  STARTS HERE-----
+      ------------------------------
+      ---------------------------
+    section.blk_3
+      .container
+        h3 Process Involved
+        .row
+          .col-md-4
+            h2
+              | Company Details and Information
+            p
+              | Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione aliquam voluptatem vitae maxime molestias debitis.
+          .col-md-4
+            h2
+              | Company Details and Information
+            p
+              | Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione aliquam voluptatem vitae maxime molestias debitis.
+          .col-md-4
+            h2
+              | Company Details and Information
+            p
+              | Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione aliquam voluptatem vitae maxime molestias debitis.
+    //
+      --------------------------
+      ------------------------------
+      -------Block 3 Ends HERE------
+      ------------------------------
+      ---------------------------
+    //
+      --------------------------
+      ------------------------------
+      -----Block 4  STARTS HERE-----
+      ------------------------------
+      ---------------------------
+    section.blk_4
+      .container-fluid
+        h2.head_1
+          | Thing you will get!!!
+        .row
+          .col-md-3
+            img(src='', alt='')
+            h3
+              | 3 Logo designs
+            p
+              | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, aliquam.
+          .col-md-3
+            img(src='', alt='')
+            h3
+              | 3 file formats
+            p
+              | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, aliquam. 
+              br
+              |  (PDF, PNG, JPEG)
+          .col-md-3
+            img(src='', alt='')
+            h3
+              | 2 Reviews and Corrections
+            p
+              | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, aliquam.
+          .col-md-3
+            img(src='', alt='')
+            h3
+              | 3 Reviews and Corrections
+            p
+              | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, aliquam.
+    //
+      --------------------------
+      ------------------------------
+      -------Block 4 Ends HERE------
+      ------------------------------
+      ---------------------------
+    //
+      --------------------------
+      ------------------------------
+      -----Block 5  STARTS HERE-----
+      ------------------------------
+      ---------------------------
+    section.blk_5
+      .Container
+        .row
+          .col-md-2
+          #logo.col-md-8.order_blk
+            h2 Brand Request Form
+            // BEGIN FORM
+            form#form1(name='form1', method='post', action='feedback.php')
+              .row-fluid
+                span#errorMessage.control-label.color-blue
+              .control-group
+                label.control-label Prefered Brand Name
+                .controls
+                  input#name.m-wrap.form-control.form-control-lg(name='name', type='text')
+              p
+              .control-group
+                label.control-label Company&apos;s Address
+                .controls
+                  input#address.m-wrap.form-control.form-control-lg(name='address', type='text')
+              p
+              .control-group
+                label.control-label Company&apos;s Phone Number
+                .controls
+                  input#phone.m-wrap.form-control.form-control-lg(name='phone', type='number')
+              p
+              .control-group
+                label.control-label Company&apos;s Website (optional)
+                .controls
+                  input#web.m-wrap.form-control.form-control-lg(name='web', type='text')
+              p
+              .control-group
+                label.control-label Company&apos;s Email 
+                .controls
+                  input#email.m-wrap.form-control.form-control-lg(name='email', type='text')
+              p
+              .control-group
+                label.control-label Preferred Color(s)
+                .controls
+                  input#coupon.form-control.form-control-lg(name='coupon', type='number')
+              p
+              .control-group
+                label.control-label Name and Additional Information
+                .controls
+                  textarea#message.m-wrap.form-control.form-control-lg(name='message', rows='8')
+              label
+                input.btn.theme-btn(name='Button', type='button', value='Send', onclick='validationBrand()')
+            // END FORM
+        .col-md-2

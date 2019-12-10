@@ -1,0 +1,51 @@
+extends ./layout/mainlayout
+include ./mixins/_flash-messages
+
+
+block content
+  section
+      .container
+        .shopping-cart
+          h1 Cart
+          .column-labels
+            label.product-image Image
+            label.product-details Product
+            label.product-price Price
+            label.product-quantity Quantity
+            label.product-removal Remove
+            label.product-line-price Total
+          .product
+            .product-image
+              img(src='https://s.cdpn.io/3/dingo-dog-bones.jpg')
+            .product-details
+              .product-title Dingo Dog Bones
+              p.product-description
+                | Description and texts
+                
+            .product-price 50 
+            .product-quantity
+              input(type='number', value='2', min='1')
+            .product-removal
+              button.remove-product
+                | Remove
+            .product-line-price 25.98
+          .totals
+            .totals-item
+              label Subtotal
+              #cart-subtotal.totals-value 71.97
+            .totals-item
+              label Tax (5%)
+              #cart-tax.totals-value 3.60
+            .totals-item
+              label Shipping
+              #cart-shipping.totals-value 15.00
+            .totals-item.totals-item-total
+              label Grand Total
+              #cart-total.totals-value 90.57
+              button.checkout Checkout
+
+
+
+                
+              
+      

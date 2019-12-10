@@ -1,0 +1,453 @@
+extends ./layout/mainlayout
+
+block content
+  //
+    -------------------------
+    -----------------------------
+    ------Block 2 starts here----
+    -----------------------------
+    --------------------------
+  section
+    #carouselExampleIndicators.carousel.slide1(data-ride='carousel', data-interval='false')
+      ol.carousel-indicators
+        li.active(data-target='#carouselExampleIndicators', data-slide-to='0')
+        li(data-target='#carouselExampleIndicators', data-slide-to='1')
+        li(data-target='#carouselExampleIndicators', data-slide-to='2')
+      .carousel-inner
+        .carousel-item.active
+          img.d-block.w-100(src='./img/banner-02.jpg', alt='First slide', style='width:100%')
+        .carousel-item
+          img.d-block.w-100(src='./img/maxresdefault.jpg', alt='Second slide', style='width:100%')
+        .carousel-item
+          img.d-block.w-100(src='./img/images (13).jpg', alt='Third slide', style='width:100%')
+      a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+        span.carousel-control-prev-icon(aria-hidden='true')
+        span.sr-only Previous
+      a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+        span.carousel-control-next-icon(aria-hidden='true')
+        span.sr-only Next
+  //
+    -------------------------
+    -----------------------------
+    ------Block 2 ends here------
+    -----------------------------
+    --------------------------
+  //
+    -------------------------
+    -----------------------------
+    ------Block 3 starts here----
+    -----------------------------
+    --------------------------
+  section.dream
+    .container-fluid
+      .row
+        .col-md-6
+          img(src='./img/welcome-1-1.png', alt='img', style='width: 100%;')
+        .col-md-6.drm-active
+          h3
+            | welcome to Phd
+          h2 Dream it. Print it.
+          p
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, consectetur laboriosam et
+            | perferendis, provident magni at magnam rem corrupti maiores amet iusto error blanditiis illo a.
+            | Temporibus sunt distinctio accusamus!
+          p
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi voluptates incidunt ipsam sint
+            | ratione aliquam nesciunt veniam. Facere necessitatibus sit, debitis, aliquid vitae dignissimos
+            | consequatur culpa aliquam ab laudantium omnis accusantium? Neque, voluptates rerum! Hic
+            | repellendus at alias obcaecati officia!
+          .learn
+            a(href='#') Learn More
+  //
+    -------------------------
+    -----------------------------
+    ------Block 3 ends here------
+    -----------------------------
+    --------------------------
+  //
+    -------------------------
+    -----------------------------
+    ------Block 4 start here-----
+    -----------------------------
+    --------------------------
+  section.blk-4
+    .container-fluid
+      div
+        h2.header
+          | Products Category
+      .row
+        // first slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators1.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators1', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators1', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators1', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/img2.jpg', alt='First slide', style='width:100%')
+              .carousel-item
+                img.d-block.w-100(src='./img/img3.jpg', alt='Second slide', style='width:100%')
+              .carousel-item
+                img.d-block.w-100(src='./img/img1.jpg', alt='Third slide', style='width:100%')
+            a.carousel-control-prev(href='#carouselExampleIndicators1', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators1', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | T-SHIRT
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // second slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators2.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators2', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators2', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators2', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/IMG_20190606_184622_2.jpg', alt='First slide', style='width:10%')
+              .carousel-item
+                img.d-block.w-100(src='./img/img8.jpg', alt='Second slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/cup2.jpg', alt='Third slide', style='width:100%')
+            a.carousel-control-prev(href='#carouselExampleIndicators2', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators2', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Custom Mugs
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // third slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators3.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators3', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators3', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators3', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/card 4.jpg', alt='First slide', style='width:30%')
+              .carousel-item
+                img.d-block.w-100(src='./img/card 1.jpg', alt='Second slide', style='width:30%')
+              .carousel-item
+                img.d-block.w-100(src='./img/card 2.jpg', alt='Third slide', style='width:30%')
+            a.carousel-control-prev(href='#carouselExampleIndicators3', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators3', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Business Cards
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // fourth slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators7.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators7', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators7', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators7', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/images (2).jpg', alt='First slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/images (3).jpg', alt='Second slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (2).jpg', alt='Third slide', style='width:70%')
+            a.carousel-control-prev(href='#carouselExampleIndicators7', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators7', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Banner &amp; Large Formats
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            button.btn.btn-order
+              a(href='/product') Order Now
+        //
+          ---------------------
+          -----second slide row----
+          ----------------------
+        // fifth slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators4.carousel.slide2(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators4', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators4', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators4', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/download (2).jpg', alt='First slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (1).jpg', alt='Second slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (2).jpg', alt='Third slide', style='width:70%')
+            a.carousel-control-prev(href='#carouselExampleIndicators4', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators4', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Notepads &amp; Jotters
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            br
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // sixth slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators5.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators5', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators5', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators5', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/IMG 71.jpg', alt='First slide', style='width:50%')
+              .carousel-item
+                img.d-block.w-100(src='./img/IMG 72.jpg', alt='Second slide', style='width:50%')
+              .carousel-item
+                img.d-block.w-100(src='./img/IMG 73.jpg', alt='Third slide', style='width:50%')
+            a.carousel-control-prev(href='#carouselExampleIndicators5', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators5', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Paper Bags
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            br
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // seventh slide
+        .col-md-3.display-slot
+          #carouselExampleIndicators6.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators6', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators6', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators6', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/download (2).jpg', alt='First slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (1).jpg', alt='Second slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (2).jpg', alt='Third slide', style='width:70%')
+            a.carousel-control-prev(href='#carouselExampleIndicators6', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators6', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Diary
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            br
+            button.btn.btn-order
+              a(href='/product') Order Now
+        // 
+        .col-md-3.display-slot
+          #carouselExampleIndicators8.carousel.slide1(data-ride='carousel', data-interval='false')
+            ol.carousel-indicators
+              li.active(data-target='#carouselExampleIndicators8', data-slide-to='0')
+              li(data-target='#carouselExampleIndicators8', data-slide-to='1')
+              li(data-target='#carouselExampleIndicators8', data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='./img/IMG_20190606_165039_5.jpg', alt='First slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (1).jpg', alt='Second slide', style='width:70%')
+              .carousel-item
+                img.d-block.w-100(src='./img/download (2).jpg', alt='Third slide', style='width:70%')
+            a.carousel-control-prev(href='#carouselExampleIndicators8', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselExampleIndicators8', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+          .display-text
+            h2
+              | Flyers &amp; Posters
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, aliquam.
+            span  For as low as #5000.00 
+            br
+            button.btn.btn-order
+              a(href='/product') Order Now
+  //
+    -------------------------
+    -----------------------------
+    ------Block 4 ends here------
+    -----------------------------
+    --------------------------
+  //
+    -------------------------
+    -----------------------------
+    -----Block 5 starts here-----
+    -----------------------------
+    --------------------------
+  section.blk-5
+    .container
+      .row.blk-img
+        .col-md-4
+          center
+            img.blk-img(src='./img/download (4).png', alt='')
+          h2
+            | Business Focus
+          p
+            | With PHD prints+designs process, you gain efficiency, dazzling designs, timeless quality and
+            | first-rate
+            | delivery.
+        .col-md-4
+          center
+            img.blk-img(src='./img/delivery.png', alt='icon')
+          h2
+            | Fast &amp; reliable delivery on time
+          p
+            | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit maiores quae facilis esse!
+        .col-md-4
+          // <img src="" alt="" class="blk-img">
+          h2
+            | Clean Design &amp; Prints
+          p
+            | We perfectly blend our colour palettes with nature, creating stunning visuals that is sure to
+            | drive attention to your
+            | brand
+  //
+    -------------------------
+    -----------------------------
+    ------Block 5 ends here------
+    -----------------------------
+    --------------------------
+  //
+    -------------------------
+    -----------------------------
+    ------Block 6 starts here----
+    -----------------------------
+    --------------------------
+  section.blk-6
+    .container
+      center
+        h2 Some of our Clients
+      .col-md-12
+        #carouselContent.carousel.slide(data-ride='carousel')
+          .carousel-inner(role='listbox')
+            .carousel-item.active.text-center
+              ul.client-list
+                li
+                  img(src='./img/clients/ltb-logo.png', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/nysc.png', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/globe-motors-logo.jpg', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/law-unin-and-rock-logo.png', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/rock-ville-and-co-logo.jpg', alt='logo', width='18%')
+            .carousel-item.text-center.p-4
+              ul.client-list
+                li
+                  img(src='./img/clients/niee-logo.fw.png', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/telenoetica-logo.png', alt='logo', width='18%')
+                li
+                  img(src='./img/clients/noor-logo.fw.png', alt='logo', width='18%')
+        a.carousel-control-prev(href='#carouselContent', role='button', data-slide='prev')
+          span.carousel-control-prev-icon(aria-hidden='true')
+          span.sr-only Previous
+        a.carousel-control-next(href='#carouselContent', role='button', data-slide='next')
+          span.carousel-control-next-icon(aria-hidden='true')
+          span.sr-only Next
+  //
+    -------------------------
+    -----------------------------
+    ------Block 6 ends here------
+    -----------------------------
+    --------------------------
+  //
+    -------------------------
+    -----------------------------
+    ------Block 7 start here------
+    -----------------------------
+    --------------------------
+  section#carousel.blk-7
+    .container
+      .col-xs-12.mb20
+        .page-header
+          h2 Client Testimonials
+      .row
+        .col-md-12
+          #carouselContent1.carousel.slide(data-ride='carousel')
+            center
+              i.fa.fa-quote-left
+            .carousel-inner(role='listbox')
+              .carousel-item.active.text-center.p-4
+                blockquote
+                  p
+                    | I am very pleased with the quality and professionalism of your company.Our
+                    | printing has always been completed on schedule. Great business!&quot;
+                  p.italic -Oluyemisi O.
+                .profile-circle(style='background-color: rgba(145,169,216,.2);')
+              .carousel-item.text-center.p-4
+                blockquote
+                  p
+                    | I just received my order outstanding! The quality of printing and paper
+                    | exceeded my expectations - beautiful work that will showcase our company
+                    | exactly as I had hoped.
+                  p.bold -Babatunde Olaise.
+                  .profile-circle(style='background-color: rgba(145,169,216,.2);')
+              .carousel-item.text-center.p-4
+                blockquote
+                  p
+                    | Profound house of designs has been my number one printer since I opened my
+                    | restaurant
+                    | five years ago. They print my menus, order forms, business cards, postcards
+                    | and have done several specialty projects, such as &apos;hand fans&apos; for the
+                    | restaurant. I never have to leave my business as my orders are picked up and
+                    | delivered directly by their sales staff, which saves me time &amp; worry.
+                  p.bold -Mohammed Bello
+              .carousel-item.text-center.p-4
+                blockquote
+                  p
+                    | It was an absolute pleasure to work with your team I have never encountered
+                    | such a high level of enthusiasm, politeness and customer care as I received
+                    | from this group of exemplary employees.
+                  p.bold -Chinonso A.
+            a.carousel-control-prev(href='#carouselContent1', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#carouselContent1', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+  //
+    -------------------------
+    -----------------------------
+    ------Block 7 ends here------
+    -----------------------------
+    --------------------------

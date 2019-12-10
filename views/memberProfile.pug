@@ -1,0 +1,41 @@
+extends ./layout/userDashboard
+include ./mixins/_flash-messages
+
+block content
+    section
+      .container-fluid
+        .row.blk-pro
+          .col-md-1
+          .col-sm-5.col-md-4
+            img.img-circle.img-responsive.img-center(src='./newPHD/public/img/card 5.jpg', alt='')
+            br
+            p
+              b First Name:
+              |  #{user.firstName}
+            p
+              b Last Name:
+              |  #{user.lastName}
+            p
+              b Email:
+              | #{user.email}
+            p
+              b Mobile Number:
+              |  #{user.phone}
+            p
+              | Address: 
+              span(style='color: #c0392b; font-weight: bold;') You have no address information
+            a.btn.btn-primary(href='/edit-profile') Edit Profile
+          .col-md-6
+            h2#heading.text-center Order History
+            table.table.table-striped.sticky-header
+              thead
+                tr
+                  th Item Name
+                  th Paid: 
+                tbody
+                  tr
+                    td bags
+                    td Paid
+
+    
+
