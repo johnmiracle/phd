@@ -5,16 +5,16 @@ block content
     .container
       .admin-top
         h3#category-subheading.header Add New Product Category
-        form#addCategoryForm.well.well-sm(method='post' action='/products/add')
+        +flashMessages()
+        form#addCategoryForm.well.well-sm(method='post' action='/admin/products/add')
           .row
-            .form-group.col-md-6
-              +flashMessages()
+            .col-md-6
               .form-group
                 label(for='name') Name
                 input#product-name.form-control(type='text', name='name', required='')
               .form-group
                 label.capitalize Category
-                select.form-control(name='field', required='')
+                select.form-control(name='category', required='')
                   option(selected='')
                   option(value='Banners') Banners
                   option(value='Business cards') Business cards
@@ -35,10 +35,27 @@ block content
                 textarea#description.form-control(type='text', name='description', required='', rows='5')
               .form-group
                 label(for='Price') Price
-                input#price.form-control(type='text', name='price', required='')
+                input#price.form-control(type='text', name='price', required='')              
+              .form-group
+                label(for='Price') In Stock
+                select.form-control(name='inStock', required='')
+                  option(selected='')
+                  option(value='yes') Yes
+                  option(value='no') No
+            .col-md-6
+              .form-group
+                label(for="image")
+                img#blah(alt='your image', width='600px', height='500px' src='404image')
+                br
+                br
+                input.preview_img(type='file', name='productimg' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" )
+                br
+                br
               .form-group
                 input.btn.btn-success(type='submit', value='Submit')
-            .col-md-6
-                label(for="image") Add image
-                img(src='./img/card 4.jpg', alt='', required='' name='productImage')
+              br 
+              br
+            
+              
+
 

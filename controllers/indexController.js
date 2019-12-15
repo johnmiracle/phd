@@ -1,3 +1,7 @@
+const Product = require("../models/Products");
+const passport =require('passport')
+const mongoose = require("mongoose");
+
 exports.home = (req, res, next) => {
   res.render("index");
 };
@@ -5,7 +9,13 @@ exports.banner = (req, res, next) => {
   res.render("Banners");
 };
 exports.brouchures = (req, res, next) => {
-  res.render("brouchures");
+  Product.find({}, (err, products) => {
+    if (err) {
+      req.flash('Danger', "Unable to load Products")
+    } else {
+      res.render("brouchures", { products });
+    }
+  });
 };
 exports.businesscards = (req, res, next) => {
   res.render("Business_card");
@@ -82,58 +92,26 @@ exports.promotional = (req, res, next) => {
 exports.poster = (req, res, next) => {
   res.render("poster");
 };
-
 exports.showLogin = (req, res, next) => {
   res.render("login");
 };
-
 exports.logout = (req, res) => {
   req.logout();
   req.flash("success", "You've successfully logged out");
   res.redirect("/login");
 };
-
-// exports.login = (req, res, next) => {
-
-//   passport.authenticate("local", function(err, user, info) {
-//     if (err) {
-//       return next(err);
-//     }
-//     if (!user) {
-//       req.flash("danger", "Username & Password combination doesn't match any of our records");
-//       return res.redirect("/login");
-//     }
-//     req.logIn(user, function(err) {
-//       if (err) {
-//         return next(err);
-//       }
-//       return res.redirect(`${req.user.account}/dashboard`);
-//     });
-//   })(req, res, next);
-// };
-
 exports.signup = (req, res, next) => {
   res.render("signup");
 };
-
 exports.product = (req, res, next) => {
   res.render("product");
-  // Product.findall((err, Product) => {
-  //   if (err) {
-  //     return next(err);
-  //   } else {
-
-  //   }
-  // });
 };
-
 exports.productId = (req, res, next) => {
   Product.findById(req.params.id, function(err, product) {
     if (err) return console.log(err);
-    res.status(200).json(product);
+    res.render("product", {product});
   });
 };
-
 exports.categories = (req, res, next) => {
   Category.find(function(err, categories) {
     if (err) return console.log(err);

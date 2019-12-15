@@ -2,7 +2,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   meta(http-equiv='X-UA-Compatible', content='ie=edge')
-  title Phd
+  title PHD
   meta(content='We are a forward thinking prints+designs company which specializes in creating strong brands for companies with interest in cutting-edge excellence.', name='description')
   meta(content='Profound House of Designs', name='PHD')
   meta(content='Profound cards, prints, designs,customized cards, phd logo,invitation cards, wedding cards,business cards, phdng.com, profound house of designs, about phd,', name='keywords')
@@ -27,7 +27,7 @@ section
     a.navbar-brand(href='/') Logo
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
+    #navbarSupportedContent.collapse.navbar-collapse.justify-content-center
       ul.navbar-nav.centered
         li.nav-item.active
           a.nav-link(href='/')
@@ -37,32 +37,21 @@ section
           a.nav-link(href='/price') Get Price Quote
         li.nav-item
           a.nav-link(href='/ourWorks') Our Works
-        li.nav-item
+        li.nav-item.flex-fill.justify-content-center
           a.nav-link(href='/contact') Contact
-      div.centered
-        ul.navbar-nav.mr-auto
-          if login
-            li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
-              | #{user.firstName}
-            .dropdown-menu
-              a.dropdown-item.nav-drop(href='/users/profile') My Profile
-              a.dropdown-item.nav-drop(href='/userOrders') Order History
-              a.dropdown-item.nav-drop(href='/logout') Log Out
-          else
-            li.nav-item
-              a.nav-link(href='/login')
-                i.fa.fa-user Sign In
-            li.nav-item
-              a.nav-link(href='/cart')
-                i.fa.fa-shopping-cart Cart
-          
-//
-  -------------------------
-  -----------------------------
-  ------Block 1 ends here------
-  -----------------------------
-  --------------------------
+    div
+      ul.navbar-nav
+        li.nav-item.dropdown
+          a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
+            | #{user.firstName}
+          .dropdown-menu
+            a.dropdown-item.nav-drop(href='/users/profile') My Profile
+            a.dropdown-item.nav-drop(href='/userOrders') Order History
+            a.dropdown-item.nav-drop(href='/logout') Log Out
+        li.nav-item
+          a.nav-link(href='/cart')
+            i.fa.fa-shopping-cart Cart
+
 //
   -------------------------
   -----------------------------
@@ -94,19 +83,19 @@ section.sect-1
               a.dropdown-item(href='/letterhead') Letter Heads
               a.dropdown-item(href='/brochures') Brochures
               a.dropdown-item(href='/poster') Posters 
-              a.dropdown-item(href='/diary') Diary
+              a.dropdown-item(href='/diary') Diary 
           li.nav-item
-            a(href='/businesscards')  Business Cards 
+            a(href='/Businesscard')  Business Cards 
           li.nav-item
-            a(href='/gift') Corportate Gifts
+            a(href='/corporategift') Corportate Gifts
           li.nav-item
             a(href='/mugs') Custom Mugs
           li.nav-item
-            a(href='/custom-tskirt') Custom T-Skirts
+            a(href='custom-tskirt') Custom T-Skirts
           li.nav-item
             a(href='/letterhead') Letter Heads
           li.nav-item
-            a(href='/brouchures') Marketing Brouchures
+            a(href='/brochures') Marketing Brochures
           li.nav-item
             a(href='/poster') Posters 
           li.nav-item
@@ -119,9 +108,14 @@ section.sect-1
   ----Section Nav ends here----
   -----------------------------
   --------------------------
-
 block content
 
+//
+  -------------------------
+  -----------------------------
+  --FOOTER SECTION STARTS HERE--
+  -----------------------------
+  --------------------------
 section.bk-yellow
   .container-fluid
     .row.ft-pad
@@ -194,5 +188,5 @@ section.bk-yellow
 script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
-//- script(type='text/javascript', src='assets/plugins/back-to-top.js')
-//- script(src='../js/main.js')
+script(type='text/javascript', src='assets/plugins/back-to-top.js')
+script(src='../js/main.js')

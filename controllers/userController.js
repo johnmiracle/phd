@@ -26,23 +26,24 @@ exports.memberRegister = async (req, res, next) => {
   check("phone", "Mobile Number is required").notEmpty();
   check("password", "Passsword is required").notEmpty();
   check("confirmPassword", "Passwords is does not match")
-    .equals(req.body.password)
+    .equals(password)
     .isLength({ min: 5 });
   check("address", "Address is required").notEmpty();
 
-  let err = validationResult(req);
+  console.log(req.body.confirmPassword);
+  let err = validationResult(req.body);
 
   if (!err.isEmpty()) {
     return res.flash({ err: err });
   } else {
-    let user = new User({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      password: password,
-      address: address,
-      audience: audience
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      phone,
+      password,
+      address,
+      audience
     });
     bcrypt.hash(user.password, 10, (err, hash) => {
       user.password = hash;
@@ -57,11 +58,16 @@ exports.memberRegister = async (req, res, next) => {
     });
   }
 };
-
+exports.memberHome = (req, res, next) => {
+  res.render("userHome");
+}
 exports.login = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/users/profile",
+    successRedirect: "/users/memeber-home",
     failureRedirect: "/login",
     failureFlash: true
   })(req, res, next);
 };
+exports.memberProfile = (req, res, next) => {
+  res.render("memberProfile");
+}

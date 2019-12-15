@@ -229,6 +229,10 @@ a {
   border-bottom: 2px solid grey;
 }
 
+.preview_img{
+
+};
+
 .btn-order {
   font-size: 18px;
   font-weight: 800;
@@ -945,7 +949,6 @@ label {
   border-radius: 5px;
   padding: 30px;
   display: flexbox;
-  width: 50%;
   margin: auto;
   margin-top: 50px;
 }

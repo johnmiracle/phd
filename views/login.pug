@@ -5,23 +5,26 @@ include ./mixins/_flash-messages
 block content
     section
     .container
-        
-        form.log-blk(method='POST', action='/users/login')
-            h2.text
-                | Login
-            +flashMessages()
-            .form-group
-                label(for='exampleInputEmail1') Email address
-                input#exampleInputEmail1.form-control(type='email', name='email' aria-describedby='emailHelp', placeholder='Enter email', )
-            .form-group
-                label(for='exampleInputPassword1') Password
-                input#exampleInputPassword1.form-control(type='password', name='password' placeholder='Password',)
-            button.btn.btn-primary(type='submit' name='submit' value='Submit') SIGN IN
-            br
-            br
-            center
-                a.log-ml.ml-r(href='#') Forgotten Password
-        center.log-top
-            | Dont have an account? 
-            a(href='/register') Sign Up
+      .row
+        .col-md-3
+        .col-md-6
+            form.log-blk(method='POST', action='/users/login')
+                h2.text
+                    | Login
+                +flashMessages()
+                .form-group
+                    label(for='exampleInputEmail1') Email address
+                    input#exampleInputEmail1.form-control(type='email', name='email' aria-describedby='emailHelp', placeholder='Enter email', )
+                .form-group
+                    label(for='exampleInputPassword1') Password
+                    input#exampleInputPassword1.form-control(type='password', name='password' placeholder='Password',)
+                button.btn.btn-primary(type='submit' name='submit' value='Submit') SIGN IN
+                br
+                br
+                center
+                    a.log-ml.ml-r(href='#') Forgotten Password
+            center.log-top
+                | Dont have an account? 
+                a(href='/register') Sign Up
+        .col-md-3
 

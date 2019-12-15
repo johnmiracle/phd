@@ -9,10 +9,10 @@ const Productschema = new mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.ObjectId,
-    ref: category
+    ref: "category"
   },
   price: {
-    type: Number,
+    type: String,
     required: true
   },
   image: String,
@@ -20,7 +20,7 @@ const Productschema = new mongoose.Schema({
     type: String,
     required: true
   },
-  instock: {
+  inStock: {
     type: Boolean
   },
   created_on: { type: Date, default: Date.now }

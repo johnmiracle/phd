@@ -35,33 +35,19 @@ block content
           </h2>
           </div>
         .row
-          .col-md-4
-            .banner_1
-              img(src='../img/images.jpg', alt='', style='width: 100%')
-              .banner_text
-                h2
-                  | One Sided Card
-                p
-                  | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque, placeat voluptates.
-                  | Voluptates!
-                p
-                  | Delivery Time: 3 - 5 working days for Lagos, 5 - 7 working days for other cities
-                span Starting from N5,000.00
-                br
-                br
-                a(href='order_form') Order Now
-          .col-md-4
-            .banner_1
-              img(src='../img/images.jpg', alt='', style='width: 100%')
-              .banner_text
-                h2
-                  | Both Sided Card
-                p
-                  | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque, placeat voluptates.
-                  | Voluptates!
-                p
-                  | Delivery Time: 3 - 5 working days for Lagos, 5 - 7 working days for other cities
-                span Starting from N7,000.00
-                br
-                br
-                a(href='order_form') Order Now
+          each product, i in products
+            .col-md-4
+              .banner_1
+                img(src='../img/images.jpg', alt='', style='width: 100%')
+                .banner_text
+                  h2
+                    | #{product.name}
+                  p
+                    | #{product.description}
+                  p
+                    | Delivery Time: 3 - 5 working days for Lagos, 5 - 7 working days for other cities
+                  span Starting from #{product.price}
+                  br
+                  br
+                  a(href="/product/"+product._id) Order Now
+
