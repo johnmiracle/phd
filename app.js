@@ -9,6 +9,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const session = require("express-session");
 const validate = require("express-validator");
+const cloudinary = require("cloudinary").v2;
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");

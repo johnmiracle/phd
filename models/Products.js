@@ -7,10 +7,10 @@ const Productschema = new mongoose.Schema({
     required: true,
     unique:true,
   },
-  category: {
-    type: mongoose.Schema.ObjectId,
-    ref: "category"
-  },
+  // category: {
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: "category"
+  // },
   price: {
     type: String,
     required: true

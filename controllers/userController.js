@@ -10,7 +10,6 @@ exports.memberRegister = async (req, res, next) => {
   const email = req.body.email;
   const phone = req.body.phone;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
   const address = req.body.address;
   const audience = req.body.audience;
 
@@ -24,13 +23,12 @@ exports.memberRegister = async (req, res, next) => {
   check("lastName", "Last name is required").notEmpty();
   check("email", "email is required").isEmail();
   check("phone", "Mobile Number is required").notEmpty();
-  check("password", "Passsword is required").notEmpty();
-  check("confirmPassword", "Passwords is does not match")
-    .equals(password)
-    .isLength({ min: 5 });
+  check("password", "Passsword is required")
+    .trim()
+    .notEmpty()
+    .isLength({ min: 6 });
   check("address", "Address is required").notEmpty();
 
-  console.log(req.body.confirmPassword);
   let err = validationResult(req.body);
 
   if (!err.isEmpty()) {
@@ -60,7 +58,7 @@ exports.memberRegister = async (req, res, next) => {
 };
 exports.memberHome = (req, res, next) => {
   res.render("userHome");
-}
+};
 exports.login = (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/users/memeber-home",
@@ -70,4 +68,4 @@ exports.login = (req, res, next) => {
 };
 exports.memberProfile = (req, res, next) => {
   res.render("memberProfile");
-}
+};
