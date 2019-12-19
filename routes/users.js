@@ -10,8 +10,7 @@ router.post("/register", userController.memberRegister);
 router.post("/login", userController.login);
 router.get("/memeber-home", userController.memberHome);
 router.get("/profile", userController.memberProfile);
-router.get("/userOrders", (req, res, next) => {
-  res.render("");
-});
+router.get("/userOrders", userController.memberOrders);
+router.get("/edit-profile", userController.memberProfileEdit);
 
 module.exports = router;

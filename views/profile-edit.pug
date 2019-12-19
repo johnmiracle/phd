@@ -1,8 +1,10 @@
-extends ./layout/userDashboard
+extends ./layout/userlayout
 include ./mixins/_flash-messages
 
 block content
     .template-pages
+      br
+      br
       .container
         .row.ds-admin-panel
           .col-md-1
@@ -10,7 +12,7 @@ block content
             .hidden-xs
               .about-header
                 img.img-responsive(src='https://www.gravatar.com/avatar/fd63280d534e8130e0853148e7019db0?d=retro&s=200', alt='')
-                p.store-name miracle Anaje
+                p.store-name #{user.firstName} #{user.lastName}
               ul.print
                 li
                   a(href='/members/profile') Profile
@@ -28,7 +30,7 @@ block content
                     input(type='hidden', name='_method', value='PUT')
                   .form-group.input-container
                     label(for='') Email Address
-                    input.form-control(type='text', name='username', disabled='disabled', value='miracleanaje@yahoo.com')
+                    input.form-control(type='text', name='username', disabled='disabled', value=user.email)
                   .form-group.input-container
                     .form-group.text
                       label.control-label(for='first-name')

@@ -7,6 +7,7 @@ block content
       .container
         .shopping-cart
           h1 Cart
+          each product, i in products
           .column-labels
             label.product-image Image
             label.product-details Product
@@ -18,17 +19,17 @@ block content
             .product-image
               img(src='https://s.cdpn.io/3/dingo-dog-bones.jpg')
             .product-details
-              .product-title Dingo Dog Bones
+              .product-title #{product.name}
               p.product-description
-                | Description and texts
+                |  #{product.description}
                 
-            .product-price 50 
+            .product-price #{product.price}
             .product-quantity
               input(type='number', value='2', min='1')
             .product-removal
               button.remove-product
                 | Remove
-            .product-line-price 25.98
+            .product-line-price price
           .totals
             .totals-item
               label Subtotal

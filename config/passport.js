@@ -27,7 +27,7 @@ module.exports = passport => {
           if (isMatch) {
             return done(null, user);
           } else {
-            return done(null, false, { message: "email and password dont match" });
+            return done(null, false, { message: "Wrong email and password combination" });
           }
         });
       }

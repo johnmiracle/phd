@@ -69,3 +69,9 @@ exports.login = (req, res, next) => {
 exports.memberProfile = (req, res, next) => {
   res.render("memberProfile");
 };
+exports.memberOrders = (req, res, next) => {
+  res.render("");
+};
+exports.memberProfileEdit = (req, res, next) => {
+  res.render("profile-edit");
+}

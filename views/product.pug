@@ -21,10 +21,10 @@ block content
             input#quantity(type='hidden', name='product_id', value='')
             input#priceHidden.form-control(type='hidden', name='priceHidden', value='')
             b Product Name:
-            input.form-control(type='text', name='productName', value='#{product.name}', readonly='')
+            input.form-control(type='text', name='productName', value='#{{product.name}}', readonly='')
             b Total (p):
             input#priceValue.form-control(type='text', name='priceValue', value='product.price', readonly='')
-          button.btn.btn-primary.btn-lg(type='submit' href='/cart') Add to Cart
+          button.btn.btn-primary.btn-lg(type='submit' href='/addtocart/'+product._id) Add to Cart
           br
           br
-          a.btn.btn-warning.btn-lg(href='/signup') Signup to begin buying
+          a.btn.btn-warning.btn-lg(href='/register') Signup to begin buying

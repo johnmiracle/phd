@@ -20,6 +20,8 @@ const app = express();
 // .env setup
 require("dotenv").config();
 
+console.log(process.env.MIRACLE);
+
 // mongoDb setup
 mongoose.set("useCreateIndex", true);
 mongoose
