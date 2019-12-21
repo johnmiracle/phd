@@ -1,15 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport =require('passport')
+const passport = require("passport");
 
-const indexController = require('../controllers/indexController')
+const indexController = require("../controllers/indexController");
 
 /* GET home page. */
-router.get('/', indexController.home);
+router.get("/", indexController.home);
 router.get("/banners", indexController.banner);
 router.get("/brouchures", indexController.brouchures);
 router.get("/businesscards", indexController.businesscards);
-router.get("/addtocart/:id?", indexController.addCart);
+router.get("/addtocart/:id", isLoggedIn, indexController.addCart);
 router.get("/remove/:id", indexController.removeCart);
 router.get("/cart", indexController.cart);
 router.get("/contact", indexController.contact);
@@ -31,7 +31,11 @@ router.get("/login", indexController.showLogin);
 router.get("/logout", indexController.logout);
 router.get("/register", indexController.signup);
 
-
-
-
 module.exports = router;
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.session.oldUrl = req.url;
+  res.redirect("/login");
+}

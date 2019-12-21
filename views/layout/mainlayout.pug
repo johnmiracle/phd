@@ -23,39 +23,47 @@ head
   -----------------------------
   --------------------------
 section
-  nav.navbar.navbar-expand-lg.navbar-light
-    a.navbar-brand(href='/') Logo
-    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
-      ul.navbar-nav.centered
-        li.nav-item.active
-          a.nav-link(href='/')
-            | Home 
-            span.sr-only
-        li.nav-item
-          a.nav-link(href='/price') Get Price Quote
-        li.nav-item
-          a.nav-link(href='/ourWorks') Our Works
-        li.nav-item
-          a.nav-link(href='/contact') Contact
-      div.centered
-        ul.navbar-nav.mr-auto
-          if login
-            li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
-              | #{user.firstName}
-            .dropdown-menu
-              a.dropdown-item.nav-drop(href='/users/profile') My Profile
-              a.dropdown-item.nav-drop(href='/userOrders') Order History
-              a.dropdown-item.nav-drop(href='/logout') Log Out
-          else
-            li.nav-item
-              a.nav-link(href='/login')
-                i.fa.fa-user Sign In
-            li.nav-item
-              a.nav-link(href='/cart')
-                i.fa.fa-shopping-cart Cart
+  .container
+    nav.navbar.navbar-expand-lg.navbar-light
+      a.navbar-brand(href='/') Logo
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
+        ul.navbar-nav.centered
+          li.nav-item.active
+            a.nav-link(href='/')
+              | Home 
+              span.sr-only
+          li.nav-item
+            a.nav-link(href='/price') Get Price Quote
+          li.nav-item
+            a.nav-link(href='/ourWorks') Our Works
+          li.nav-item
+            a.nav-link(href='/contact') Contact
+        div.centered
+          ul.navbar-nav.mr-auto
+            if user
+             li.nav-item.dropdown
+              a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
+                | #{user.firstName}
+              .dropdown-menu
+                a.dropdown-item.nav-drop(href='/users/profile') My Profile
+                a.dropdown-item.nav-drop(href='/userOrders') Order History
+                a.dropdown-item.nav-drop(href='/logout') Log Out
+             li.nav-item
+                a.nav-link(href='/cart')
+                  i.fa.fa-shopping-cart
+                  if session.cart
+                    span.badge= session.cart.totalQty
+            else
+              li.nav-item
+                a.nav-link(href='/login')
+                  i.fa.fa-user Sign In
+              li.nav-item
+                a.nav-link(href='/cart')
+                  i.fa.fa-shopping-cart
+                  if session.cart
+                    span.badge= session.cart.totalQty
           
 //
   -------------------------

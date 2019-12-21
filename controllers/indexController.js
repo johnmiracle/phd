@@ -1,6 +1,6 @@
 const Product = require("../models/Products");
-const passport =require('passport')
-const mongoose = require("mongoose");
+const passport = require("passport");
+const Cart = require("../models/cart");
 
 exports.home = (req, res, next) => {
   res.render("index");
@@ -11,7 +11,7 @@ exports.banner = (req, res, next) => {
 exports.brouchures = (req, res, next) => {
   Product.find({}, (err, products) => {
     if (err) {
-      req.flash('Danger', "Unable to load Products")
+      req.flash("Danger", "Unable to load Products");
     } else {
       res.render("brouchures", { products });
     }
@@ -23,17 +23,17 @@ exports.businesscards = (req, res, next) => {
 exports.addCart = (req, res, next) => {
   const productId = req.params.id;
   const cart = new Cart(req.session.cart ? req.session.cart : {});
-  const product = products.filter(function(item) {
-    return item.id == productId;
+  Product.findById(productId, function(err, product) {
+    if (err) {
+      // return res.redirect("/");
+    }
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect("/");
   });
-  cart.add(product[0], productId);
-  req.session.cart = cart;
-  res.redirect("/");
-  inline();
 };
 exports.cart = (req, res, next) => {
-  res.render("cart");
-
   if (!req.session.cart) {
     return res.render("cart", {
       products: null
@@ -41,15 +41,15 @@ exports.cart = (req, res, next) => {
   }
   const cart = new Cart(req.session.cart);
   res.render("cart", {
-    products: cart.getItems(),
+    products: cart.generateArray(),
     totalPrice: cart.totalPrice
   });
 };
 exports.removeCart = (req, res, next) => {
-  var productId = req.params.id;
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
 
-  cart.remove(productId);
+  cart.removeItem(productId);
   req.session.cart = cart;
   res.redirect("/cart");
 };
@@ -97,6 +97,7 @@ exports.showLogin = (req, res, next) => {
 };
 exports.logout = (req, res) => {
   req.logout();
+  req.session.cart = null;
   req.flash("success", "You've successfully logged out");
   res.redirect("/login");
 };
@@ -109,7 +110,7 @@ exports.product = (req, res, next) => {
 exports.productId = (req, res, next) => {
   Product.findById(req.params.id, function(err, product) {
     if (err) return console.log(err);
-    res.render("product", {product});
+    res.render("product", { product });
   });
 };
 exports.categories = (req, res, next) => {

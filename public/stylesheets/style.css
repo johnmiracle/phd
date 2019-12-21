@@ -229,10 +229,6 @@ a {
   border-bottom: 2px solid grey;
 }
 
-.preview_img{
-
-};
-
 .btn-order {
   font-size: 18px;
   font-weight: 800;
@@ -806,7 +802,8 @@ h4 {
 }
 
 /* This is used as the traditional .clearfix class */
-.group:before, .shopping-cart:before,
+.group:before,
+.shopping-cart:before,
 .column-labels:before,
 .product:before,
 .totals-item:before,
@@ -819,14 +816,16 @@ h4 {
   display: table;
 }
 
-.group:after, .shopping-cart:after,
+.group:after,
+.shopping-cart:after,
 .column-labels:after,
 .product:after,
 .totals-item:after {
   clear: both;
 }
 
-.group, .shopping-cart,
+.group,
+.shopping-cart,
 .column-labels,
 .product,
 .totals-item {
@@ -1353,14 +1352,14 @@ textarea {
   }
 
   .no-touch .cd-gallery > li:hover li.move-right,
-.no-touch .cd-gallery > li:hover li.move-left {
+  .no-touch .cd-gallery > li:hover li.move-left {
     /* show preview items when hover over the its parent list item */
     opacity: 0.3;
   }
 }
 @media only screen and (min-width: 1048px) {
   .cd-item-wrapper li.move-left,
-.cd-item-wrapper li.move-right {
+  .cd-item-wrapper li.move-right {
     /* hide preview items */
     opacity: 0;
   }
@@ -1438,7 +1437,7 @@ textarea {
 }
 @media only screen and (min-width: 1048px) {
   .cd-item-wrapper li.move-left,
-.cd-item-wrapper li.move-right {
+  .cd-item-wrapper li.move-right {
     /* hide preview items */
     opacity: 0;
   }

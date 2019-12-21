@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const flash = require("connect-flash");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const validate = require("express-validator");
 const cloudinary = require("cloudinary").v2;
 
@@ -19,8 +20,6 @@ const app = express();
 
 // .env setup
 require("dotenv").config();
-
-console.log(process.env.MIRACLE);
 
 // mongoDb setup
 mongoose.set("useCreateIndex", true);
@@ -53,7 +52,9 @@ app.use(
   session({
     resave: false,
     saveUninitialized: true,
-    secret: process.env.SECRET
+    secret: process.env.SECRET,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 }
   })
 );
 
@@ -75,6 +76,8 @@ app.use(passport.session());
 // locals
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
+  res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
   next();
 });
 

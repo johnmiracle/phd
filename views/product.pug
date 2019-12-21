@@ -6,25 +6,22 @@ block content
   section
    .container.product-blk
     .row
-      .col-md-8
+      .col-md-7
         img(src='../img/banner-02.jpg', alt='', style='width: 100%')
-      .col-md-4
-        h3 #{product.name}
-        p #{product.price}
-        form(action='', method='post')
-          .btn-group(role='group', aria-label='...')
-            input#quantity(type='hidden', name='quantity', value='1')
-            button#minus.btn.btn-danger(type='submit') -
-            button#total.btn.btn-success(type='submit') 1
-            button#plus.btn.btn-danger(type='submit') +
-          .form-group
-            input#quantity(type='hidden', name='product_id', value='')
-            input#priceHidden.form-control(type='hidden', name='priceHidden', value='')
-            b Product Name:
-            input.form-control(type='text', name='productName', value='#{{product.name}}', readonly='')
-            b Total (p):
-            input#priceValue.form-control(type='text', name='priceValue', value='product.price', readonly='')
-          button.btn.btn-primary.btn-lg(type='submit' href='/addtocart/'+product._id) Add to Cart
-          br
-          br
-          a.btn.btn-warning.btn-lg(href='/register') Signup to begin buying
+      .col-md-5
+        .cart
+          h3 #{product.name}
+          p #{product.price}
+            .form-group
+              input#quantity(type='hidden', name='product_id', value='')
+              input#priceHidden.form-control(type='hidden', name='priceHidden', value='')
+              b Product description:
+              br
+              | #{product.description}
+              br
+              br
+          
+            a.btn.btn-primary.btn-lg(type='submit', role='button' href='/addtocart/'+product._id) Add to Cart
+            br
+            br
+            a.btn.btn-warning.btn-lg(href='/register') Signup to begin buying
