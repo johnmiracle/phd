@@ -46,60 +46,6 @@ exports.addproduct = async (req, res, next) => {
       }
     });
   });
-
-  // let imgUrl = "";
-
-  // cloudinary.uploader.upload(req.files.image.path, resultImage => {
-  //   console.log("Product Cloud Image URL:\t" + resultImage.url);
-  //   imgUrl = resultImage.url;
-  //   console.log("img url value:\t" + imgUrl);
-
-  //   Products.findOne({ slug: slug })
-  //     .select("_id title slug image desc price category")
-  //     .exec()
-  //     .then(product => {
-  //       if (product) {
-  //         req.flash("danger", "Product Title Already Exists");
-  //         res.render("admin/add_product", {
-  //           title: title,
-  //           slug: slug,
-  //           price: price,
-  //           desc: desc,
-  //           category: cat,
-  //           image: imgUrl
-  //         });
-  //       } else {
-  //         // start reading from here... sorry had to include the other parts above
-  //         console.log("Unique Product Slug");
-
-  //         let price2 = parseFloat(price).toFixed(2);
-
-  //         let product = new Products({
-  //           title: title,
-  //           slug: slug,
-  //           price: price2,
-  //           desc: desc,
-  //           category: cat,
-  //           image: imgUrl
-  //         });
-
-  //         product
-  //           .save()
-  //           .then(data => {
-  //             console.log("Product Created:\t" + data);
-
-  //             req.flash("success", "New Product Created");
-  //             res.redirect("/admin/products");
-  //           })
-  //           .catch(e => {
-  //             console.error("Error Saving Product:\t" + e);
-  //           });
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // });
 };
 
 exports.addproductpage = (req, res, next) => {
