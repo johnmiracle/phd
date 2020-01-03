@@ -6,7 +6,7 @@ block content
   section
       .container
         .shopping-cart
-          if Object.keys(products).length >= 1
+          if (products)
             h3 Cart
             .column-labels
               label.product-image Image
@@ -22,7 +22,7 @@ block content
                 .product-details
                   .product-title #{product.item.name} 
                   p.product-description  
-                    |  #{product.item.description}   
+                    |  #{product.item.description}
                 .product-price #{product.price}
                 .product-quantity
                   span.badge.right-align= product.qty
@@ -32,11 +32,8 @@ block content
                 .product-line-price #{`${product.price}`}
             .totals
               .totals-item
-                label Subtotal
-                #cart-subtotal.totals-value 71.97
-              .totals-item
                 label Tax (5%)
-                #cart-tax.totals-value 3.60
+                #cart-tax.totals-value #{`${this.tax}`}
               .totals-item
                 label Shipping
                 #cart-shipping.totals-value 15.00

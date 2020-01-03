@@ -48,6 +48,7 @@ a {
   color: white !important;
 }
 
+
 .centered {
   text-align: center !important;
 }
@@ -82,6 +83,11 @@ a {
   padding: 20px;
   border-radius: 50%;
 }
+
+/* .fa-shopping-cart{
+  font-size: 20px !important;
+} */
+
 .social_icon .fa-google {
   background: #d34a28;
   padding: 20px;

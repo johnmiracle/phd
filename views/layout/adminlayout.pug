@@ -63,6 +63,83 @@ section
   -----------------------------
   --------------------------
 
+// /navbar
+.wrapper
+  .container
+    .row
+      .span3
+        .sidebar
+          ul.widget.widget-menu.unstyled
+            li.active
+              a(href='index.html')
+                i.menu-icon.icon-dashboard
+                | Dashboard
+            li
+              a(href='activity.html')
+                i.menu-icon.icon-bullhorn
+                | News Feed
+            li
+              a(href='message.html')
+                i.menu-icon.icon-inbox
+                | Inbox 
+                b.label.green.pull-right
+                  | 11
+            li
+              a(href='task.html')
+                i.menu-icon.icon-tasks
+                | Tasks 
+                b.label.orange.pull-right
+                  | 19
+          // /.widget-nav
+          ul.widget.widget-menu.unstyled
+            li
+              a(href='ui-button-icon.html')
+                i.menu-icon.icon-bold
+                |  Buttons
+            li
+              a(href='ui-typography.html')
+                i.menu-icon.icon-book
+                | Typography
+            li
+              a(href='form.html')
+                i.menu-icon.icon-paste
+                | Forms
+            li
+              a(href='table.html')
+                i.menu-icon.icon-table
+                | Tables
+            li
+              a(href='charts.html')
+                i.menu-icon.icon-bar-chart
+                | Charts
+          // /.widget-nav
+          ul.widget.widget-menu.unstyled
+            li
+              a.collapsed(data-toggle='collapse', href='#togglePages')
+                i.menu-icon.icon-cog
+                i.icon-chevron-down.pull-right
+                i.icon-chevron-up.pull-right
+                | More Pages
+              ul#togglePages.collapse.unstyled
+                li
+                  a(href='other-login.html')
+                    i.icon-inbox
+                    | Login
+                li
+                  a(href='other-user-profile.html')
+                    i.icon-inbox
+                    | Profile
+                li
+                  a(href='other-user-listing.html')
+                    i.icon-inbox
+                    | All Users
+            li
+              a(href='#')
+                i.menu-icon.icon-signout
+                | Logout
+        // /.sidebar
+
+
 block content
 
 section.bk-yellow

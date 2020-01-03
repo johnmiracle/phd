@@ -20,8 +20,12 @@ block content
               | #{product.description}
               br
               br
-          
-            a.btn.btn-primary.btn-lg(type='submit', role='button' href='/addtocart/'+product._id) Add to Cart
-            br
-            br
-            a.btn.btn-warning.btn-lg(href='/register') Signup to begin buying
+            if user
+              a.btn.btn-primary.btn-lg(type='submit', role='button' href='/addtocart/'+product._id) Add to Cart
+              br
+              br
+            else
+              a.btn.btn-primary.btn-lg(type='submit', role='button' href='/addtocart/'+product._id) Add to Cart
+              br
+              br
+              a.btn.btn-warning.btn-lg(href='/register') Signup to begin buying

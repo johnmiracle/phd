@@ -52,16 +52,16 @@ section
                 a.dropdown-item.nav-drop(href='/logout') Log Out
              li.nav-item
                 a.nav-link(href='/cart')
-                  i.fa.fa-shopping-cart
+                  i.fa.fa-shopping-cart Cart
                   if session.cart
                     span.badge= session.cart.totalQty
             else
-              li.nav-item
+             li.nav-item
                 a.nav-link(href='/login')
                   i.fa.fa-user Sign In
-              li.nav-item
+             li.nav-item
                 a.nav-link(href='/cart')
-                  i.fa.fa-shopping-cart
+                  i.fa.fa-shopping-cart Cart
                   if session.cart
                     span.badge= session.cart.totalQty
           
@@ -100,7 +100,7 @@ section.sect-1
               a.dropdown-item(href='/notes&jotter') Note &amp; Jotters
               a.dropdown-item(href='/Businesscards')  Business Cards 
               a.dropdown-item(href='/letterhead') Letter Heads
-              a.dropdown-item(href='/brochures') Brochures
+              a.dropdown-item(href='/brouchures') Brouchures
               a.dropdown-item(href='/poster') Posters 
               a.dropdown-item(href='/diary') Diary
           li.nav-item
