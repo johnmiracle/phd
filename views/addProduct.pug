@@ -46,13 +46,14 @@ block content
             .col-md-6
               .form-group
                 label
-                img#blah(alt='your image', width='600px', height='500px' src='404image')
+                img#blah(alt='your image', width='500px', height='500px' src='404image')
                 br
                 br
-                input.preview_img(type='file', name='image' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" )
-                br
-                br
-              .form-group
-                input.btn.btn-success(type='submit', value='Submit')
+                .btn.btn-primary.btn-sm.float-left
+                  span Choose file
+                  input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' ) 
+              br
+              br
+              button.btn.btn-success(type='submit', value='Submit') Add product
               br 
               br

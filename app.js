@@ -10,7 +10,6 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const validate = require("express-validator");
-const cloudinary = require("cloudinary").v2;
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -41,7 +40,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "/public")));
-
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
