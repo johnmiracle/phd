@@ -13,9 +13,9 @@ const Categoryschema = new mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.ObjectId,
-    ref: "User"
+    ref: User
   },
   created_on: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("Category", Categoryschema);
+module.exports = Category = mongoose.model("Category", Categoryschema);

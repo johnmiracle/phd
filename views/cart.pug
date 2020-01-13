@@ -40,7 +40,7 @@ block content
               .totals-item.totals-item-total
                 label Grand Total
                 #cart-total.totals-value #{`${totalPrice}`}
-              button.checkout Checkout
+              a.checkout(href='/checkout') Checkout
           else  
             .card-content
               h4.center No Items In Cart

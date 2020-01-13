@@ -8,7 +8,6 @@ head
   meta(content='Profound cards, prints, designs,customized cards, phd logo,invitation cards, wedding cards,business cards, phdng.com, profound house of designs, about phd,', name='keywords')
   // Bootstrap cdn
   link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', type='text/css')
-  // <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" type="text/css">
   link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito')
   link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Arvo')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css')
@@ -23,38 +22,37 @@ head
   -----------------------------
   --------------------------
 section
-  nav.navbar.navbar-expand-lg.navbar-light
-    a.navbar-brand(href='/') Logo
-    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
-      ul.navbar-nav.centered
-        li.nav-item.active
-          a.nav-link(href='/')
-            | Home 
-            span.sr-only
-        li.nav-item
-          a.nav-link(href='("/admin/add-category') Add Category
-        li.nav-item
-          a.nav-link(href='/admin/add-product') Add Product
-        li.nav-item
-          a.nav-link(href='') All Products
-      div.centered
-        ul.navbar-nav.mr-auto
-          if login
-            li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
-              | #{user.firstName}
-            .dropdown-menu
-              a.dropdown-item.nav-drop(href='') Customers Orders
-              a.dropdown-item.nav-drop(href='/logout') Log Out
-          else
-            li.nav-item
-              a.nav-link(href='/login')
-                i.fa.fa-user Sign In
-            li.nav-item
-              a.nav-link(href='/cart')
-                i.fa.fa-shopping-cart Cart
+  .container
+    nav.navbar.navbar-expand-lg.navbar-light
+      a.navbar-brand(href='/admin/admin-home') Logo
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
+        ul.navbar-nav.centered
+          li.nav-item.active
+            a.nav-link(href='/admin/admin-home')
+              | Home 
+              span.sr-only
+          li.nav-item
+            a.nav-link(href='/admin/all-categories') All Category
+          li.nav-item
+            a.nav-link(href='/admin/all-products') All Products
+          li.nav-item
+            a.nav-link(href='') All Users
+        div.centered
+          ul.navbar-nav.mr-auto
+            if login
+              li.nav-item.dropdown
+                a#navbardrop.nav-link.dropdown-toggle.fa.fa-user(href='#', data-toggle='dropdown')
+                  | #{user.firstName}
+                .dropdown-menu
+                  a.dropdown-item.nav-drop(href='') Customers Orders
+                  a.dropdown-item.nav-drop(href='/admin/logout') Log Out
+            else
+              li.nav-item
+                a.nav-link(href='/admin/login')
+                  i.fa.fa-user Sign In
+              
           
 //
   -------------------------
@@ -62,83 +60,6 @@ section
   ------Block 1 ends here------
   -----------------------------
   --------------------------
-
-// /navbar
-.wrapper
-  .container
-    .row
-      .span3
-        .sidebar
-          ul.widget.widget-menu.unstyled
-            li.active
-              a(href='index.html')
-                i.menu-icon.icon-dashboard
-                | Dashboard
-            li
-              a(href='activity.html')
-                i.menu-icon.icon-bullhorn
-                | News Feed
-            li
-              a(href='message.html')
-                i.menu-icon.icon-inbox
-                | Inbox 
-                b.label.green.pull-right
-                  | 11
-            li
-              a(href='task.html')
-                i.menu-icon.icon-tasks
-                | Tasks 
-                b.label.orange.pull-right
-                  | 19
-          // /.widget-nav
-          ul.widget.widget-menu.unstyled
-            li
-              a(href='ui-button-icon.html')
-                i.menu-icon.icon-bold
-                |  Buttons
-            li
-              a(href='ui-typography.html')
-                i.menu-icon.icon-book
-                | Typography
-            li
-              a(href='form.html')
-                i.menu-icon.icon-paste
-                | Forms
-            li
-              a(href='table.html')
-                i.menu-icon.icon-table
-                | Tables
-            li
-              a(href='charts.html')
-                i.menu-icon.icon-bar-chart
-                | Charts
-          // /.widget-nav
-          ul.widget.widget-menu.unstyled
-            li
-              a.collapsed(data-toggle='collapse', href='#togglePages')
-                i.menu-icon.icon-cog
-                i.icon-chevron-down.pull-right
-                i.icon-chevron-up.pull-right
-                | More Pages
-              ul#togglePages.collapse.unstyled
-                li
-                  a(href='other-login.html')
-                    i.icon-inbox
-                    | Login
-                li
-                  a(href='other-user-profile.html')
-                    i.icon-inbox
-                    | Profile
-                li
-                  a(href='other-user-listing.html')
-                    i.icon-inbox
-                    | All Users
-            li
-              a(href='#')
-                i.menu-icon.icon-signout
-                | Logout
-        // /.sidebar
-
 
 block content
 
@@ -211,8 +132,8 @@ section.bk-yellow
   -----------------------------
   --------------------------
 // Scripts
-script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js")
+//- script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+//- script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
-//- script(type='text/javascript', src='assets/plugins/back-to-top.js')
-//- script(src='../js/main.js')
+script(src='/js/main.js')

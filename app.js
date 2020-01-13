@@ -9,6 +9,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const cors = require("cors");
 const validate = require("express-validator");
 
 const indexRouter = require("./routes/index");
@@ -68,6 +69,14 @@ app.use(function(req, res, next) {
 
 // flash
 app.use(flash());
+
+// cors
+const corsOption = {
+  allowHeaders: ["Content-Type", "Accept", "Authorization"],
+  allowMethods: ["GET", "PUT", "POST", "OPTIONS"],
+  origin: "*"
+};
+app.use(cors(corsOption));
 
 // passport
 require("./config/passport")(passport);

@@ -58,7 +58,10 @@ block content
                     option(value='Twitter') Twitter
                     option(value='Google Advert') Google Advert
                     option(value='Friends') Friends
-                // form-group end.//
+                .form-group.input-group
+                  .input-group-prepend
+                  input#isAdmin.form-control(type='hidden', name='isAdmin', value='')
+                // form-group end.
                 .form-group
                   button.btn.btn-primary.btn-block(type='submit')  Create Account 
                 // form-group//

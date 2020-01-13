@@ -38,7 +38,7 @@ block content
           each product, i in products
             .col-md-4
               .banner_1
-                img(src='http://res.cloudinary.com/miraclejohn/image/upload/v1578098180/uc1x5cpkga6zqmlra2ie.jpg', alt='', style='width: 100%')
+                img(src='#{product.image}', alt='', style='width: 100%' )
                 .banner_text
                   h2
                     | #{product.name}

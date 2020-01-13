@@ -1,0 +1,133 @@
+extends ./layout/mainlayout
+include ./mixins/_flash-messages
+
+block content
+    .container-fluid.my-5
+      .row.justify-content-center
+        .col-xl-10
+          .card.shadow-lg
+            .row.justify-content-around
+              .col-md-5
+                .card.border-0
+                  .card-header.pb-0
+                    h2.card-title.space Checkout
+                    p.card-text.text-muted.mt-4.space SHIPPING DETAILS
+                    hr.my-0
+                  .card-body
+                    .row.justify-content-between
+                      .col-auto.mt-0
+                        p
+                          b #{user.address}
+                      .col-auto
+                        p
+                          b #{user.email}
+                    .row.mt-4
+                      .col
+                        p.text-muted.mb-2 PAYMENT DETAILS
+                        hr.mt-0
+                    .form-group
+                      label.small.text-muted.mb-1(for='NAME')
+                        | NAME ON
+                        | CARD
+                      input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='BBBootstrap Team')
+                    .form-group
+                      label.small.text-muted.mb-1(for='NAME')
+                        | CARD
+                        | NUMBER
+                      input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='4534 5555 5555 5555')
+                    .row.no-gutters
+                      .col-sm-6.pr-sm-2
+                        .form-group
+                          label.small.text-muted.mb-1(for='NAME')
+                            | VALID
+                            | THROUGH
+                          input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='06/21')
+                      .col-sm-6
+                        .form-group
+                          label.small.text-muted.mb-1(for='NAME')
+                            | CVC
+                            | CODE
+                          input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='183')
+                    .row.mb-md-5
+                      .col
+                        button.btn.btn-lg.btn-block(type='button', name='', id='') PURCHASE $37 SEK
+              .col-md-5
+                .card.border-0
+                  .card-header.card-2
+                    p.card-text.text-muted.mt-md-4.mb-2.space
+                      | YOUR ORDER 
+                      span.small.text-muted.ml-2.cursor-pointer(href='') EDIT SHOPPING BAG
+                    hr.my-2
+                  .card-body.pt-0
+                    .row.justify-content-between
+                      .col-auto.col-md-7
+                        .media.flex-column.flex-sm-row
+                          img.img-fluid(src='https://i.imgur.com/6oHix28.jpg', width='62', height='62')
+                          .media-body.my-auto
+                            .row
+                              .col-auto
+                                p.mb-0
+                                  b EC-GO Bag Standard
+                                small.text-muted 1 Week Subscription
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p.boxed-1 2
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p
+                          b 179 SEK
+                    hr.my-2
+                    .row.justify-content-between
+                      .col-auto.col-md-7
+                        .media.flex-column.flex-sm-row
+                          img.img-fluid(src='https://i.imgur.com/9MHvALb.jpg', width='62', height='62')
+                          .media-body.my-auto
+                            .row
+                              .col
+                                p.mb-0
+                                  b EC-GO Bag Standard
+                                small.text-muted 2 Week Subscription
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p.boxed 3
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p
+                          b 179 SEK
+                    hr.my-2
+                    .row.justify-content-between
+                      .col-auto.col-md-7
+                        .media.flex-column.flex-sm-row
+                          img.img-fluid(src='https://i.imgur.com/6oHix28.jpg', width='62', height='62')
+                          .media-body.my-auto
+                            .row
+                              .col
+                                p.mb-0
+                                  b EC-GO Bag Standard
+                                small.text-muted 2 Week Subscription
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p.boxed-1 2
+                      .pl-0.flex-sm-col.col-auto.my-auto
+                        p
+                          b 179 SEK
+                    hr.my-2
+                    .row
+                      .col
+                        .row.justify-content-between
+                          .col-4
+                            p.mb-1
+                              b Subtotal
+                          .flex-sm-col.col-auto
+                            p.mb-1
+                              b 179 SEK
+                        .row.justify-content-between
+                          .col
+                            p.mb-1
+                              b Shipping
+                          .flex-sm-col.col-auto
+                            p.mb-1
+                              b 0 SEK
+                        .row.justify-content-between
+                          .col-4
+                            p
+                              b Total
+                          .flex-sm-col.col-auto
+                            p.mb-1
+                              b 537 SEK
+                        hr.my-0

@@ -18,12 +18,15 @@ const Userschema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    required: "Please supply your phone Number",
     trim: true
   },
   password: {
     type: String,
     required: "Please this field is required"
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   },
   address: String,
   audience: String,

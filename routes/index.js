@@ -10,9 +10,10 @@ router.get("/banners", indexController.banner);
 router.get("/brouchures", indexController.brouchures);
 router.get("/businesscards", indexController.businesscards);
 router.get("/addtocart/:id", isLoggedIn, indexController.addCart);
-router.get("/remove/:id", indexController.removeCart);
+router.get("/remove/:id", isLoggedIn, indexController.removeCart);
 router.get("/cart", indexController.cart);
 router.get("/contact", indexController.contact);
+router.post('/contact-us', indexController.contact_us)
 router.get("/gift", indexController.gift);
 router.get("/stationary", indexController.stationary);
 router.get("/mugs", indexController.mugs);
@@ -30,6 +31,7 @@ router.get("/product/:id", indexController.productId);
 router.get("/login", indexController.showLogin);
 router.get("/logout", indexController.logout);
 router.get("/register", indexController.signup);
+router.get("/checkout", isLoggedIn, indexController.checkout);
 
 module.exports = router;
 function isLoggedIn(req, res, next) {
@@ -38,4 +40,13 @@ function isLoggedIn(req, res, next) {
   }
   req.session.oldUrl = req.url;
   res.redirect("/login");
+}
+
+function isAdmin(req, res, next) {
+  if (req.User.isAdmin) {
+    req.flash("Danger", "You don't have the premission ");
+    res.redirect(backURL);
+  } else {
+    next();
+  }
 }

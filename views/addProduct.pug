@@ -1,4 +1,4 @@
-extends ./layout/mainlayout
+extends ./layout/adminlayout
 include ./mixins/_flash-messages
 
 block content
@@ -6,7 +6,7 @@ block content
     .container
       .admin-top
         h3#category-subheading.header Add New Product Category
-        +flashMessages()
+        +flashMessages()   
         form#addCategoryForm.well.well-sm(method='post' action='/admin/products/add' enctype="multipart/form-data")
           .row
             .col-md-6
@@ -17,20 +17,8 @@ block content
                 label.capitalize Category
                 select.form-control(name='category', required='')
                   option(selected='')
-                  option(value='Banners') Banners
-                  option(value='Business cards') Business cards
-                  option(value='roll up banners') Roll up banners
-                  option(value='Letter heads') Letter heads
-                  option(value='Posters') Posters 
-                  option(value='corporate gifts') Corporate gifts
-                  option(value='Custom mugs') Custom mugs
-                  option(value='Marketing Brouchures') Marketing Brouchures
-                  option(value='Logo development') Logo development
-                  option(value='Diary') Diary
-                  option(value='note&jotters') Note &amp; Jotters
-                  option(value='Corporate Stationary') Corporate Stationary
-                  option(value='Promotional Items') Promotional Items
-                  option(value='Custom T-skirt') Custom T-skirt
+                    each categories, i in category
+                      option(value=categories.name._id) #{categories.name}
               .form-group
                 label(for='Description') Description
                 textarea#description.form-control(type='text', name='description', required='', rows='5')
@@ -45,15 +33,13 @@ block content
                   option(value='no') No
             .col-md-6
               .form-group
-                label
-                img#blah(alt='your image', width='500px', height='500px' src='404image')
-                br
-                br
                 .btn.btn-primary.btn-sm.float-left
                   span Choose file
-                  input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' ) 
-              br
-              br
+                  input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' )
+                  br
+                label
+                  br
+                  img#blah(alt='your image', width='500px', height='500px' src='404image')
               button.btn.btn-success(type='submit', value='Submit') Add product
               br 
               br
