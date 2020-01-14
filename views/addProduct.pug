@@ -18,7 +18,7 @@ block content
                 select.form-control(name='category', required='')
                   option(selected='')
                     each categories, i in category
-                      option(value=categories.name._id) #{categories.name}
+                      option(value=category.id, selected=(Product.category == categories.id)) #{categories.name}
               .form-group
                 label(for='Description') Description
                 textarea#description.form-control(type='text', name='description', required='', rows='5')
@@ -35,7 +35,7 @@ block content
               .form-group
                 .btn.btn-primary.btn-sm.float-left
                   span Choose file
-                  input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' )
+                  input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' require='')
                   br
                 label
                   br

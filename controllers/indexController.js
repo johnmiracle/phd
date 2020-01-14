@@ -66,7 +66,6 @@ exports.contact = (req, res, next) => {
 
 exports.contact_us = (req, res, next) => {
   const { name, email, message } = req.body;
-  
 };
 
 exports.gift = (req, res, next) => {
@@ -151,5 +150,14 @@ exports.categories = (req, res, next) => {
 };
 
 exports.checkout = (req, res, next) => {
-  res.render("checkout");
+  if (!req.session.cart) {
+    return res.render("checkout", {
+      products: null
+    });
+  }
+  const cart = new Cart(req.session.cart);
+  res.render("checkout", {
+    products: cart.generateArray(),
+    totalPrice: cart.totalPrice
+  });
 };

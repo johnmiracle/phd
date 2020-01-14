@@ -24,7 +24,8 @@ exports.addproduct = async (req, res, next) => {
   //create an urembo product
   const Product = new product();
   Product.name = req.body.name;
-  Product.category = req.body.category;
+  Product.category.id = req.body.category._id;
+  console.log(category._id)
   Product.price = req.body.price;
   Product.image = result.secure_url;
   Product.description = req.body.description;
@@ -214,22 +215,14 @@ exports.productEdit = (req, res, next) => {
 };
 
 exports.product_delete = (req, res, next) => {
-  // let query = { _id: req.params.id };
-  // product.findByIdAndRemove(query, function(err) {
-  //   if (err) {
-  //     res.redirect("/admin/all-products");
-  //     req.flash("Error", err.message);
-  //   }
-  //   req.flash("Deleted successfully!");
-  //   res.redirect("/admin/all-products");
-  // });
-
-  product.remove({ id: req.params.product_id }, function(err) {
-    if (!err) {
-      return res.flash("Success", "Product deleted!");
-    } else {
-      return res.flash("Error", "Error deleting product!");
+  let query = { _id: req.params.id };
+  product.findByIdAndRemove(query, function(err) {
+    if (err) {
+      res.redirect("/admin/all-products");
+      req.flash("Error", err.message);
     }
+    req.flash("Deleted successfully!");
+    res.redirect("/admin/all-products");
   });
 };
 

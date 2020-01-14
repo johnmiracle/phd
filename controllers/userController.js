@@ -13,7 +13,7 @@ exports.memberRegister = async (req, res, next) => {
   const address = req.body.address;
   const audience = req.body.audience;
   const isAdmin = req.body.isAdmin;
-  
+
   let user = await User.findOne({ email: req.body.email });
   if (user) {
     req.flash("danger", "email is already registered, Please login");

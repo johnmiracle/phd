@@ -27,9 +27,9 @@ block content
           tbody
             each product, i in products
                 tr
-                td img(src='/'+ #{product.imageUrl})
+                td img(src='#{product.imageUrl}')
                 td #{product.name}
-                td Administration
+                td #{product.category}
                 td #{product.price}
                 td #{product.description}
                 td #{product.inStock}

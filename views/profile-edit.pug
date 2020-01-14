@@ -36,24 +36,24 @@ block content
                       label.control-label(for='first-name')
                         | First
                         | Name
-                      input#first-name.form-control(type='text', name='first_name', maxlength='255', value='miracle')
+                      input#first-name.form-control(type='text', name='first_name', maxlength='255', value=user.firstName)
                   .form-group.input-container
                     .form-group.text
                       label.control-label(for='last-name')
                         | Last
                         | Name
-                      input#last-name.form-control(type='text', name='last_name', maxlength='255', value='Anaje')
+                      input#last-name.form-control(type='text', name='last_name', maxlength='255', value=user.lastName)
                   .form-group.input-container
                     .form-group.text
                       label.control-label(for='address')
                         | Address
-                      input#last-name.form-control(type='text', name='address', maxlength='255', value='41,community road, akoka, bariga, lagos')
+                      input#last-name.form-control(type='text', name='address', maxlength='255', value=user.address)
                   .form-group.input-container
                     .form-group.text
                       label.control-label(for='phone-number')
                         | Phone
                         | Number
-                      input#phone-number.form-control(type='text', name='phone_number', maxlength='255', value='08131179082')
+                      input#phone-number.form-control(type='text', name='phone_number', maxlength='255', value=user.phone)
                   .form-group.input-container
                     label(for='') Date of birth
                     div
