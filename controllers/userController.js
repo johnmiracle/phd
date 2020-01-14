@@ -1,8 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const passport = require("passport");
-const mongoose = require("mongoose");
-const User = mongoose.model("User");
+const User = require('../models/User');
 
 exports.memberRegister = async (req, res, next) => {
   const firstName = req.body.firstName;
