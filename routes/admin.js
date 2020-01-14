@@ -36,6 +36,8 @@ router.get("/all-products", isLoggedIn, isAdmin, adminController.products);
 router.get("/all-categories", isLoggedIn, isAdmin, adminController.viewCategory);
 router.get("/product/edit/:id", isLoggedIn, isAdmin, adminController.viewProductEdit);
 router.post("/product/edit/:id", isLoggedIn, isAdmin, adminController.productEdit);
+router.get("/category/edit/:id", isLoggedIn, isAdmin, adminController.viewCategoryEdit);
+router.post("/category/edit/:id", isLoggedIn, isAdmin, adminController.categoryEdit);
 router.delete("/product/delete/:id", isLoggedIn, isAdmin, adminController.product_delete);
 router.get("/logout", adminController.logout);
 

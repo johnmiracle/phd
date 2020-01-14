@@ -25,7 +25,7 @@ exports.addproduct = async (req, res, next) => {
   const Product = new product();
   Product.name = req.body.name;
   Product.category.id = req.body.category._id;
-  console.log(category._id)
+  console.log(category._id);
   Product.price = req.body.price;
   Product.image = result.secure_url;
   Product.description = req.body.description;
@@ -180,7 +180,6 @@ exports.viewProductEdit = (req, res, next) => {
 };
 
 exports.productEdit = (req, res, next) => {
-  //create an urembo product
   let Product = [];
   Product.name = req.body.name;
   // Product.category = req.body.category.name;
@@ -234,6 +233,44 @@ exports.viewCategory = (req, res, next) => {
       res.render("admin-category", { category });
     }
   });
+};
+
+exports.viewCategoryEdit = (req, res, next) => {
+  category.findById(req.params.id, function(err, category) {
+    if (err) return console.log(err);
+    res.render("admin-category-edit", { category });
+  });
+};
+
+exports.categoryEdit = (req, res, next) => {
+  let Category = [];
+  Category.name = req.body.name;
+  Category.description = req.body.description;
+
+  let query = { _id: req.params.id };
+  console.log(Category.description);
+
+  category
+    .update(query, Category, function(err) {
+      // handle errors
+      if (err) {
+        req.flash("danger", err.message);
+        console.log(err);
+        res.redirect("/admin/all-categories");
+      }
+      if (category.Category === req.body) {
+        res.redirect("/admin/all-categories");
+        req.flash("Success", "Product has been updated Successfully");
+      } else {
+        // no errors, return success message
+        req.flash("Success", "Product has been updated Successfully");
+        // redirect to the add category view
+        res.redirect("/admin/all-categories");
+      }
+    })
+    .catch(err => {
+      req.flash("Danger", "Error updating product, Try again");
+    });
 };
 
 exports.logout = (req, res) => {

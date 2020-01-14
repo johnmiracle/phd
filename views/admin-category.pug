@@ -27,7 +27,7 @@ block content
                 td #{categories.name}
                 td #{categories.description}
                 td
-                    a.edit(title='Edit', data-toggle='tooltip' href="/admin/product/edit/"+category._id)
+                    a.edit(title='Edit', data-toggle='tooltip' href="/admin/category/edit/"+categories._id)
                         i.fa.fa-pencil
-                    a.delete-product(href='/admin/product/delete/'+category._id)
+                    a.delete-product(href='/admin/category/delete/'+categories._id)
                         i.fa.fa-trash
