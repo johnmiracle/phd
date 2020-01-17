@@ -1066,7 +1066,7 @@ h4 {
 .product .product-price:before,
 .product .product-line-price:before,
 .totals-value:before {
-  content: "$";
+  content: "₦";
 }
 
 label {
@@ -1117,7 +1117,7 @@ label {
   padding: 4px 8px;
   background-color: #c66;
   color: #fff;
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  font-family: Nunito, sans-serif;
   font-size: 12px;
   border-radius: 3px;
 }
@@ -1144,7 +1144,7 @@ label {
   text-align: right;
 }
 .totals .totals-item-total {
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  font-family: Nunito, sans-serif;
 }
 
 .checkout {
@@ -1153,13 +1153,16 @@ label {
   margin-top: 20px;
   padding: 6px 25px;
   background-color: #6b6;
-  color: #fff;
-  font-size: 25px;
+  color: #fff !important;
+  font-size: 25px !important;
+  font-family: Nunito, sans-serif;
   border-radius: 3px;
 }
 
 .checkout:hover {
-  background-color: #494;
+  font-family: Nunito, sans-serif;
+  background-color: #494 !important;
+  color: #fff !important;
 }
 
 /* ==================================*/
@@ -1859,6 +1862,10 @@ textarea {
 
   .log-blk {
     width: 100%;
+  }
+
+  .mobile{
+    display: none !important;
   }
 }
 

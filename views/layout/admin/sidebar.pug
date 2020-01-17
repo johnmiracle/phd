@@ -1,0 +1,58 @@
+// Main Sidebar Container
+aside.main-sidebar.sidebar-dark-primary
+  // Brand Logo
+  a.brand-link(href='')
+    img.brand-image.img-circle(src="/img/phd-1.png", alt='PHD Logo')
+    span.brand-text.font-weight-light 
+      b Profound
+  // Sidebar
+  .sidebar
+    // Sidebar user panel (optional)
+    .user-panel.mt-3.pb-3.mb-3.d-flex
+      .image
+        img.img-circle(src="/img/phd-1.png", alt='User Image')
+      .info
+        a.d-block(href='#') #{user.firstName} #{user.lastName}
+    // Sidebar Menu
+    nav.mt-2
+      ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu')
+        //
+          Add icons to the links using the .nav-icon class
+          with font-awesome or any other icon font library
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href='')
+            i.nav-icon.fa.fa-tags
+            p
+              | Categories
+              i.right.fa.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href='/admin/all-categories')
+                i.fa.fa-circle.nav-icon
+                p All Categories
+            li.nav-item
+              a.nav-link(href='/admin/add-category')
+                i.fa.fa-plus.nav-icon
+                p Add Category
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href='')
+            i.nav-icon.fa.fa-tags
+            p
+              | Products
+              i.right.fa.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href='/admin/all-products')
+                i.fa.fa-circle.nav-icon
+                p All products
+            li.nav-item
+              a.nav-link(href='/admin/add-product')
+                i.fa.fa-plus.nav-icon
+                p Add Product
+        li.nav-item
+          a.nav-link(href='/admin/users')
+            i.nav-icon.fa.fa-user
+            p
+              | All Users
+    // /.sidebar-menu
+  // /.sidebar

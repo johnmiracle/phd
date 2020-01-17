@@ -1,4 +1,4 @@
-extends ./layout/adminlayout
+extends ./layout/admin/base
 include ./mixins/_flash-messages
 
 block content
@@ -30,12 +30,12 @@ block content
                 td img(src='#{product.imageUrl}')
                 td #{product.name}
                 td #{product.category}
-                td #{product.price}
+                td ₦#{product.price}
                 td #{product.description}
                 td #{product.inStock}
                 td
                     a.edit(title='Edit', data-toggle='tooltip' href="/admin/product/edit/"+product._id)
-                        i.fa.fa-pencil
+                        i.fa.fa-edit
                     a.delete-product(href='/admin/product/delete/'+product._id)
                         i.fa.fa-trash
               

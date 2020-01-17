@@ -1,4 +1,4 @@
-extends ./layout/adminlayout
+extends ./layout/admin/base
 include ./mixins/_flash-messages
 
 block content
@@ -15,10 +15,15 @@ block content
                 input#product-name.form-control(type='text', name='name', required='')
               .form-group
                 label.capitalize Category
-                select.form-control(name='category', required='')
-                  option(selected='')
-                    each categories, i in category
-                      option(value=category.id, selected=(Product.category == categories.id)) #{categories.name}
+                //- select.form-control(name='category', required='')
+                //-   option(selected='')
+                //-     each categories, i in category
+                //-       option(value=categories._id, selected=(Product.category == categories._id)) #{categories.name}
+                select.form-control(name='category')
+                  option(value='')
+                    each categories in category
+                      - const select=null; if (Product.category == categories.name) select='selected';
+                      option(value=caterories, selected=select)= categories.name
               .form-group
                 label(for='Description') Description
                 textarea#description.form-control(type='text', name='description', required='', rows='5')
@@ -39,7 +44,7 @@ block content
                   br
                 label
                   br
-                  img#blah(alt='your image', width='500px', height='500px' src='404image')
+                  img#blah(alt='', width='500px', height='500px' src='404image')
               button.btn.btn-success(type='submit', value='Submit') Add product
               br 
               br

@@ -4,14 +4,6 @@ const upload = require("../config/multer");
 
 const adminController = require("../controllers/adminCollector");
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/admin/cPanel");
-  req.flash("Danger", "Please sign in");
-}
-
 function isAdmin(req, res, next) {
   const backURL = req.header("Referer");
 
@@ -22,7 +14,6 @@ function isAdmin(req, res, next) {
     res.redirect(backURL);
   }
 }
-
 router.get("/cpanel", adminController.adminlogin);
 router.post("/login", adminController.login);
 router.get("/admin-home", isLoggedIn, isAdmin, adminController.adminHome);
@@ -38,7 +29,16 @@ router.get("/product/edit/:id", isLoggedIn, isAdmin, adminController.viewProduct
 router.post("/product/edit/:id", isLoggedIn, isAdmin, adminController.productEdit);
 router.get("/category/edit/:id", isLoggedIn, isAdmin, adminController.viewCategoryEdit);
 router.post("/category/edit/:id", isLoggedIn, isAdmin, adminController.categoryEdit);
+router.get("/users", isLoggedIn, isAdmin, adminController.viewUsers);
 router.delete("/product/delete/:id", isLoggedIn, isAdmin, adminController.product_delete);
 router.get("/logout", adminController.logout);
 
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/admin/cPanel");
+  req.flash("Danger", "Please sign in");
+}

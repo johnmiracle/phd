@@ -18,14 +18,13 @@ cloudinary.config({
 });
 
 exports.addproduct = async (req, res, next) => {
-  const category = await product.findById(req.params.id).populate("category");
-
   const result = await cloudinary.uploader.upload(req.file.path);
-  //create an urembo product
+
+  //create an New product
   const Product = new product();
   Product.name = req.body.name;
-  Product.category.id = req.body.category._id;
-  console.log(category._id);
+  Product.category = req.body.category._id;
+  console.log(Product.category);
   Product.price = req.body.price;
   Product.image = result.secure_url;
   Product.description = req.body.description;
@@ -272,6 +271,16 @@ exports.categoryEdit = (req, res, next) => {
       req.flash("Danger", "Error updating product, Try again");
     });
 };
+
+exports.viewUsers = (req, res, next) => {
+  User.find({}, (err, users) => {
+    if (err) {
+      req.flash("Danger", "Unable to load Users");
+    } else {
+      res.render("admin-users", { users });
+    }
+  });
+}
 
 exports.logout = (req, res) => {
   req.logout();
