@@ -6,7 +6,7 @@ block content
   section
       .container
         .shopping-cart
-          if (products)
+          if (products.length > 0)
             h3 Cart
             .column-labels
               label.product-image Image
@@ -25,7 +25,11 @@ block content
                     |  #{product.item.description}
                 .product-price #{product.price}
                 .product-quantity
-                  span.badge.right-align= product.qty
+                  .btn-group(role='group', aria-label='...')
+                    //- input#quantity(type='hidden', name='quantity', value=)
+                    a#minus.btn.btn-danger(type='submit' href='/reducebyone/'+product.item._id) -
+                    a#total.btn.btn(type='submit')=product.qty
+                    a#plus.btn.btn-danger(type='submit' href='/addbyone/'+product.item._id) +
                 .product-removal
                   a.remove-product(href='/remove/'+product.item._id)
                     | Remove
@@ -33,7 +37,7 @@ block content
             .totals
               .totals-item
                 label Tax (5%)
-                #cart-tax.totals-value  #{`${this.tax}`}
+                #cart-tax.totals-value  #{`${tax}`}
               .totals-item
                 label Shipping
                 #cart-shipping.totals-value 15.00

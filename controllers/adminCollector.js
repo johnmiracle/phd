@@ -212,7 +212,8 @@ exports.productEdit = (req, res, next) => {
     });
 };
 
-exports.product_delete = (req, res, next) => {
+exports.product_delete = async (req, res, next) => {
+  query = await Subscriber.findById(req.params.id)
   let query = { _id: req.params.id };
   product.findByIdAndRemove(query, function(err) {
     if (err) {

@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const passport = require("passport");
-const User = require('../models/User');
+const User = require("../models/User");
 
 exports.memberRegister = async (req, res, next) => {
   const firstName = req.body.firstName;
@@ -48,10 +48,17 @@ exports.memberRegister = async (req, res, next) => {
       user.save(function(err) {
         if (err) {
           console.log(err);
-        } else {
-          req.flash("success", "Registration is successfull, Please Login");
-          res.redirect("/login");
-        }
+        } else
+          (req, res, next) => {
+            if (req.session.oldUrl) {
+              const oldUrl = req.session.oldUrl;
+              req.session.oldUrl = null;
+              res.redirect(oldUrl);
+            } else {
+              req.flash("success", "Registration is successfull, Please Login");
+              res.redirect("/login");
+            }
+          };
       });
     });
   }
@@ -59,13 +66,7 @@ exports.memberRegister = async (req, res, next) => {
 exports.memberHome = (req, res, next) => {
   res.render("userHome");
 };
-exports.login = (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/users/memeber-home",
-    failureRedirect: "/login",
-    failureFlash: true
-  })(req, res, next);
-};
+
 exports.memberProfile = (req, res, next) => {
   res.render("memberProfile");
 };

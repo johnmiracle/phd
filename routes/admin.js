@@ -14,6 +14,13 @@ function isAdmin(req, res, next) {
     res.redirect(backURL);
   }
 }
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/admin/cPanel");
+  req.flash("Danger", "Please sign in");
+}
 router.get("/cpanel", adminController.adminlogin);
 router.post("/login", adminController.login);
 router.get("/admin-home", isLoggedIn, isAdmin, adminController.adminHome);
@@ -34,11 +41,3 @@ router.delete("/product/delete/:id", isLoggedIn, isAdmin, adminController.produc
 router.get("/logout", adminController.logout);
 
 module.exports = router;
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/admin/cPanel");
-  req.flash("Danger", "Please sign in");
-}

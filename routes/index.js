@@ -9,11 +9,13 @@ router.get("/", indexController.home);
 router.get("/banners", indexController.banner);
 router.get("/brouchures", indexController.brouchures);
 router.get("/businesscards", indexController.businesscards);
-router.get("/addtocart/:id", isLoggedIn, indexController.addCart);
-router.get("/remove/:id", isLoggedIn, indexController.removeCart);
+router.get("/addtocart/:id", indexController.addCart);
+router.get("/addbyone/:id", indexController.addOne);
+router.get("/reducebyone/:id", indexController.removeOne);
+router.get("/remove/:id", indexController.removeCart);
 router.get("/cart", indexController.cart);
 router.get("/contact", indexController.contact);
-router.post('/contact-us', indexController.contact_us)
+router.post("/contact-us", indexController.contact_us);
 router.get("/gift", indexController.gift);
 router.get("/stationary", indexController.stationary);
 router.get("/mugs", indexController.mugs);
@@ -32,6 +34,7 @@ router.get("/login", indexController.showLogin);
 router.get("/logout", indexController.logout);
 router.get("/register", indexController.signup);
 router.get("/checkout", isLoggedIn, indexController.checkout);
+router.post("/checkout_action", isLoggedIn, indexController.checkout_action);
 
 module.exports = router;
 function isLoggedIn(req, res, next) {
