@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
-
 const indexController = require("../controllers/indexController");
+const { isAdmin, isLoggedIn, isLogIn } = require("../controllers/authController");
 
 /* GET home page. */
 router.get("/", indexController.home);
@@ -33,23 +32,10 @@ router.get("/product/:id", indexController.productId);
 router.get("/login", indexController.showLogin);
 router.get("/logout", indexController.logout);
 router.get("/register", indexController.signup);
-router.get("/checkout", isLoggedIn, indexController.checkout);
-router.post("/checkout_action", isLoggedIn, indexController.checkout_action);
+router.get("/checkout", isLogIn, indexController.checkout);
+router.post("/checkout_action", isLogIn, indexController.checkout_action);
+
+router.get("/checkingout", indexController.checkoutPage);
+router.post("/checkOUT", indexController.check);
 
 module.exports = router;
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.session.oldUrl = req.url;
-  res.redirect("/login");
-}
-
-function isAdmin(req, res, next) {
-  if (req.User.isAdmin) {
-    req.flash("Danger", "You don't have the premission ");
-    res.redirect(backURL);
-  } else {
-    next();
-  }
-}

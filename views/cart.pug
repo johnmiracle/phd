@@ -23,10 +23,9 @@ block content
                   .product-title #{product.item.name} 
                   p.product-description  
                     |  #{product.item.description}
-                .product-price #{product.price}
+                .product-price #{product.item.price}
                 .product-quantity
                   .btn-group(role='group', aria-label='...')
-                    //- input#quantity(type='hidden', name='quantity', value=)
                     a#minus.btn.btn-danger(type='submit' href='/reducebyone/'+product.item._id) -
                     a#total.btn.btn(type='submit')=product.qty
                     a#plus.btn.btn-danger(type='submit' href='/addbyone/'+product.item._id) +
@@ -47,7 +46,10 @@ block content
               a.checkout(href='/checkout') Checkout
           else  
             .card-content
-              h4.center No Items In Cart
+              center
+                i.fa.fa-shopping-cart
+                  h2
+                    | Cart empty
 
 
 

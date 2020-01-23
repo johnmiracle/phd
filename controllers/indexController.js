@@ -1,6 +1,13 @@
 const Product = require("../models/Products");
 const passport = require("passport");
 const Cart = require("../models/cart");
+const paypal = require("paypal-rest-sdk");
+
+paypal.configure({
+  mode: "sandbox",
+  client_id: "AWl8wDxinaB5LMTObH3D2Hn_SbQF_W0oOTqahfyW9xBAiCKfnqJMlpV6OtEdf4K_Kqg6vD98K2zU8YXQ",
+  client_secret: "ECB9MEcHx4svkN-d5t5Cx1ZMmHWlC00VZh4ITsOcICFJ8hARCG6K_qJCoWnj5JJ0DxhAkJC-88sdaDpu"
+});
 
 exports.home = (req, res, next) => {
   res.render("index");
@@ -59,7 +66,7 @@ exports.removeOne = (req, res, next) => {
 exports.cart = (req, res, next) => {
   if (!req.session.cart) {
     return res.render("cart", {
-      products: null
+      products: null || {},
     });
   }
   const cart = new Cart(req.session.cart);
@@ -185,75 +192,89 @@ exports.checkout_action = (req, res, next) => {
   const cart = new Cart(req.session.cart);
 
   // setup the payment object
-  const payment = {
+  const create_payment_json = {
     intent: "sale",
     payer: {
       payment_method: "paypal"
     },
     redirect_urls: {
-      return_url: session.baseUrl + "/paypal/checkout_return",
-      cancel_url: session.baseUrl + "/paypal/checkout_cancel"
+      return_url: "http://localhost:3500",
+      cancel_url: "http://localhost:3500/checkout"
     },
 
     transactions: [
       {
-        items_list: {},
+        item_list: {
+          items: [
+            {
+              name: "item",
+              sku: "item",
+              price: "1.00",
+              currency: "USD",
+              quantity: 1
+            }
+          ]
+        },
         amount: {
           total: cart.totalPrice,
           currency: "NGN"
         },
-        description: cart.description
+        description: cart.generateArray()
       }
     ]
   };
-
-  // create payment
-  paypal.payment.create(payment, (error, payment) => {
+  paypal.payment.create(create_payment_json, function(error, payment) {
     if (error) {
-      req.flash("Danger", "There was an error processing your payment. You have not been changed and can try again.");
-      res.redirect("/checkout");
-      return;
+      throw error;
     } else {
       console.log("Create Payment Response");
       console.log(payment);
-      res.redirect("/cart");
     }
-    // if (payment.payer.payment_method === "paypal") {
-    //   req.session.paymentId = payment.id;
-    //   let redirectUrl;
-    //   for (let i = 0; i < payment.links.length; i++) {
-    //     const link = payment.links[i];
-    //     if (link.method === "REDIRECT") {
-    //       redirectUrl = link.href;
-    //     }
-    //   }
+  });
+};
 
-    //   // if there is no items in the cart then render a failure
-    //   if (!req.session.cart) {
-    //     req.flash("Danger", "The are no items in your cart. Please add some items before checking out");
-    //     res.redirect("/cart");
-    //     return;
-    //   }
+exports.checkoutPage = (req, res, next) => {
+  res.render("checkingout");
+};
 
-    //   // new order doc
-    //   const orderDoc = {
-    //     orderPaymentId: payment.id,
-    //     orderPaymentGateway: "Paypal",
-    //     orderTotal: req.session.totalCartAmount,
-    //     orderEmail: req.body.shipEmail,
-    //     orderFirstname: req.body.shipFirstname,
-    //     orderLastname: req.body.shipLastname,
-    //     orderAddr1: req.body.shipAddr1,
-    //     orderAddr2: req.body.shipAddr2,
-    //     orderCountry: req.body.shipCountry,
-    //     orderState: req.body.shipState,
-    //     orderPostcode: req.body.shipPostcode,
-    //     orderPhoneNumber: req.body.shipPhoneNumber,
-    //     orderComment: req.body.orderComment,
-    //     orderStatus: payment.state,
-    //     orderDate: new Date(),
-    //     orderProducts: req.session.cart
-    //   };
-    // }
+exports.check = (req, res, next) => {
+  const create_payment_json = {
+    intent: "sale",
+    payer: {
+      payment_method: "paypal"
+    },
+    redirect_urls: {
+      return_url: "http://localhost:3500",
+      cancel_url: "http://localhost:3500/checkout"
+    },
+
+    transactions: [
+      {
+        item_list: {
+          items: [
+            {
+              name: "item",
+              sku: "item",
+              price: "1.00",
+              currency: "USD",
+              quantity: 1
+            }
+          ]
+        },
+        amount: {
+          total: "25.00",
+          currency: "NGN"
+        },
+        description: "products and item"
+      }
+    ]
+  };
+  paypal.payment.create(create_payment_json, function(error, payment) {
+    if (error) {
+      throw error;
+    } else {
+      console.log("Create Payment Response");
+      console.log(payment);
+    }
   });
 };

@@ -1,11 +1,13 @@
 extends ./layout/mainlayout
 include ./mixins/_flash-messages
+  - script(src='https://www.paypal.com/sdk/js?client-id=AWl8wDxinaB5LMTObH3D2Hn_SbQF_W0oOTqahfyW9xBAiCKfnqJMlpV6OtEdf4K_Kqg6vD98K2zU8YXQ')                
 
 block content
     .container-fluid.my-5
       if (products)
         .row.justify-content-center
           .col-xl-10
+            +flashMessages()
             .card.shadow-lg
               .row.justify-content-around
                 .col-md-5
@@ -26,7 +28,7 @@ block content
                         .col
                           p.text-muted.mb-2 PAYMENT DETAILS
                           hr.mt-0
-                      form(method='POST', action="/checkout_action")
+                      form(method='POST', action="")
                         .form-group
                           label.small.text-muted.mb-1(for='NAME')
                             | NAME ON
@@ -101,4 +103,4 @@ block content
       else  
         .card-content
           h4.center No Items In Cart
-                        
+

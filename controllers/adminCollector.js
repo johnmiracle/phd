@@ -23,10 +23,9 @@ exports.addproduct = async (req, res, next) => {
   //create an New product
   const Product = new product();
   Product.name = req.body.name;
-  Product.category = req.body.category._id;
-  console.log(Product.category);
+  Product.category = req.body.category;
   Product.price = req.body.price;
-  Product.image = result.secure_url;
+  Product.imageUrl = result.secure_url;
   Product.description = req.body.description;
   Product.inStock = req.body.inStock;
 
@@ -38,7 +37,7 @@ exports.addproduct = async (req, res, next) => {
       res.redirect("/admin/add-product");
     } else {
       // no errors, return success message
-      req.flash("Success", "Product has been added Successfully");
+      req.flash("success", "Product has been added Successfully");
       // redirect to the add category view
       res.redirect("/admin/add-product");
     }
@@ -48,11 +47,11 @@ exports.addproduct = async (req, res, next) => {
 };
 
 exports.addproductpage = (req, res, next) => {
-  category.find({}, (err, category) => {
+  category.find({}, (err, categories) => {
     if (err) {
       req.flash("Danger", "Unable to load Categories");
     } else {
-      res.render("addProduct", { category });
+      res.render("addProduct", { categories });
     }
   });
 };
@@ -162,13 +161,13 @@ exports.adminHome = (req, res, next) => {
 };
 
 exports.products = (req, res, next) => {
-  product.find({}, (err, products) => {
-    if (err) {
-      req.flash("Danger", "Unable to load Products");
-    } else {
-      res.render("admin-product-view", { products });
-    }
-  });
+  const Product = product.findById(req.body).populate("Category")
+  console.log(req.params._id)
+  product
+    .find()
+    .select(req.params.id)
+    .then(products => res.render("admin-product-view", { products }))
+    .catch(err => console.log(err));
 };
 
 exports.viewProductEdit = (req, res, next) => {
@@ -186,34 +185,28 @@ exports.productEdit = (req, res, next) => {
   Product.description = req.body.description;
   Product.inStock = req.body.inStock;
 
-  console.log(Product);
   let query = { _id: req.params.id };
 
-  product
-    .update(query, Product, function(err) {
-      // handle errors
-      if (err) {
-        req.flash("danger", err.message);
-        console.log(err);
-        res.redirect("/admin/all-products");
-      }
-      if (product.Product === req.body) {
-        res.redirect("/admin/all-products");
-        req.flash("Success", "Product has been updated Successfully");
-      } else {
-        // no errors, return success message
-        req.flash("Success", "Product has been updated Successfully");
-        // redirect to the add category view
-        res.redirect("/admin/all-products");
-      }
-    })
-    .catch(err => {
-      req.flash("Danger", "Error updating product, Try again");
-    });
+  product.update(query, Product, function(err) {
+    // handle errors
+    if (err) {
+      req.flash("danger", err.message);
+      console.log(err);
+      res.redirect("/admin/all-products");
+    }
+    if (product.Product === req.body) {
+      res.redirect("/admin/all-products");
+      req.flash("Success", "Product has been updated Successfully");
+    } else {
+      // no errors, return success message
+      req.flash("Success", "Product has been updated Successfully");
+      // redirect to the add category view
+      res.redirect("/admin/all-products");
+    }
+  });
 };
 
-exports.product_delete = async (req, res, next) => {
-  query = await Subscriber.findById(req.params.id)
+exports.product_delete = (req, res, next) => {
   let query = { _id: req.params.id };
   product.findByIdAndRemove(query, function(err) {
     if (err) {
@@ -226,19 +219,19 @@ exports.product_delete = async (req, res, next) => {
 };
 
 exports.viewCategory = (req, res, next) => {
-  category.find({}, (err, category) => {
+  category.find({}, (err, categories) => {
     if (err) {
       req.flash("Danger", "Unable to load Categories");
     } else {
-      res.render("admin-category", { category });
+      res.render("admin-category", { categories });
     }
   });
 };
 
 exports.viewCategoryEdit = (req, res, next) => {
-  category.findById(req.params.id, function(err, category) {
+  category.findById(req.params.id, function(err, categories) {
     if (err) return console.log(err);
-    res.render("admin-category-edit", { category });
+    res.render("admin-category-edit", { categories });
   });
 };
 
@@ -248,8 +241,6 @@ exports.categoryEdit = (req, res, next) => {
   Category.description = req.body.description;
 
   let query = { _id: req.params.id };
-  console.log(Category.description);
-
   category
     .update(query, Category, function(err) {
       // handle errors
@@ -273,6 +264,18 @@ exports.categoryEdit = (req, res, next) => {
     });
 };
 
+exports.category_delete = (req, res, next) => {
+  let query = { _id: req.params.id };
+  category.findByIdAndRemove(query, function(err) {
+    if (err) {
+      res.redirect("/admin/all-categories");
+      req.flash("Error", err.message);
+    }
+    req.flash("Deleted successfully!");
+    res.redirect("/admin/all-categories");
+  });
+};
+
 exports.viewUsers = (req, res, next) => {
   User.find({}, (err, users) => {
     if (err) {
@@ -281,9 +284,9 @@ exports.viewUsers = (req, res, next) => {
       res.render("admin-users", { users });
     }
   });
-}
+};
 
-exports.logout = (req, res) => {
+exports.logout = (req, res, next) => {
   req.logout();
   req.flash("success", "You've successfully logged out");
   res.redirect("/admin/cPanel");

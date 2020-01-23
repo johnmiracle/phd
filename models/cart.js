@@ -3,7 +3,7 @@ const product = require("../models/Products");
 module.exports = function Cart(oldCart) {
   this.items = oldCart.items || {};
   this.totalQty = oldCart.totalQty || 0;
-  this.tax = '5%';
+  this.tax = '5%' || 0;
   this.totalPrice = oldCart.totalPrice || 0;
 
   this.add = function(item, id) {

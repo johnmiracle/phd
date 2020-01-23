@@ -999,6 +999,10 @@ h4 {
 /* ==================================*/
 /* Global settings */
 /* Global "table" column settings */
+.card-content .fa-shopping-cart {
+  font-size: 230px;
+}
+
 .product-image {
   float: left;
   width: 20%;
@@ -1864,8 +1868,12 @@ textarea {
     width: 100%;
   }
 
-  .mobile{
+  .mobile {
     display: none !important;
+  }
+
+  .card-content .fa-shopping-cart {
+    font-size: 50px;
   }
 }
 

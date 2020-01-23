@@ -10,7 +10,7 @@ block content
           .admin-top
             h3#category-subheading.header Edit Product Category
             +flashMessages()
-            form#addCategoryForm.well.well-sm(method='post' action='/admin/category/edit/'+category._id)
+            form#addCategoryForm.well.well-sm(method='post' action='/admin/category/edit/' +category._id)
               .form-group
                 label(for='name') Name
                 input#product-name.form-control(type='text', name='name', required='' value=category.name)

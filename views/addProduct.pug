@@ -15,15 +15,10 @@ block content
                 input#product-name.form-control(type='text', name='name', required='')
               .form-group
                 label.capitalize Category
-                //- select.form-control(name='category', required='')
-                //-   option(selected='')
-                //-     each categories, i in category
-                //-       option(value=categories._id, selected=(Product.category == categories._id)) #{categories.name}
                 select.form-control(name='category')
                   option(value='')
-                    each categories in category
-                      - const select=null; if (Product.category == categories.name) select='selected';
-                      option(value=caterories, selected=select)= categories.name
+                    each category in categories
+                      option(value=category.id)= category.name
               .form-group
                 label(for='Description') Description
                 textarea#description.form-control(type='text', name='description', required='', rows='5')

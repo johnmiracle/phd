@@ -18,4 +18,4 @@ const Categoryschema = new mongoose.Schema({
   created_on: { type: Date, default: Date.now }
 });
 
-module.exports = Category = mongoose.model("Category", Categoryschema);
+module.exports = mongoose.model("Category", Categoryschema);
