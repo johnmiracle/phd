@@ -161,8 +161,8 @@ exports.adminHome = (req, res, next) => {
 };
 
 exports.products = (req, res, next) => {
-  const Product = product.findById(req.body).populate("Category")
-  console.log(req.params._id)
+  const Product = product.findById(req.body).populate("Category");
+  console.log(req.params._id);
   product
     .find()
     .select(req.params.id)
@@ -229,9 +229,9 @@ exports.viewCategory = (req, res, next) => {
 };
 
 exports.viewCategoryEdit = (req, res, next) => {
-  category.findById(req.params.id, function(err, categories) {
+  category.findById(req.params.id, function(err, category) {
     if (err) return console.log(err);
-    res.render("admin-category-edit", { categories });
+    res.render("admin-category-edit", { category });
   });
 };
 
@@ -251,10 +251,10 @@ exports.categoryEdit = (req, res, next) => {
       }
       if (category.Category === req.body) {
         res.redirect("/admin/all-categories");
-        req.flash("Success", "Product has been updated Successfully");
+        req.flash("Success", "Category has been updated Successfully");
       } else {
         // no errors, return success message
-        req.flash("Success", "Product has been updated Successfully");
+        req.flash("Success", "Category has been updated Successfully");
         // redirect to the add category view
         res.redirect("/admin/all-categories");
       }
