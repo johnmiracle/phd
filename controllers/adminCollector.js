@@ -64,7 +64,7 @@ exports.addproduct = (req, res, next) => {
       product.inStock = req.body.inStock;
       product.imageUrl = imagepath;
 
-      Product.save(err => {
+      product.save(err => {
         // handle errors
         if (err) {
           req.flash("danger", err);
@@ -81,6 +81,7 @@ exports.addproduct = (req, res, next) => {
 };
 
 exports.addproductpage = (req, res, next) => {
+  // fetch the categories to display on the page
   Category.find({}, (err, categories) => {
     if (err) {
       req.flash("Danger", "Unable to load Categories");
@@ -103,10 +104,10 @@ exports.addcategory = (req, res, next) => {
   category.author = req.body.author;
 
   // save the category name to mongo
-  Category.save(err => {
+  category.save(err => {
     // handle errors
     if (err) {
-      req.flash("danger", err);
+      req.flash("danger", err.message);
       res.redirect("/admin/add-category");
     } else {
       // no errors, return success message
