@@ -1,0 +1,102 @@
+extends ./layout/mainlayout
+include ./mixins/_flash-messages
+
+block content
+    .container
+        .col-sm-12
+            br
+            h2 View Order
+        br
+        .order-layout.col-md-12
+            .row
+                .col-md-12.bottom-pad-20
+                    a.btn.btn-outline-info.float-right(href='/users/orders') Go Back
+            br
+            ul.list-group
+            li.list-group-item.list-group-input-pad
+                strong  Order status: 
+                    span.text-#{getStatusColor result.orderStatus} pull-right">{{result.orderStatus}}
+                span.text-success.float-right Paid
+                .float-right.col-md-2
+                select#orderStatus.form-control
+                    option Completed
+                    option Paid
+                    option Pending
+                    option Cancelled
+                    option Declined
+                    option Shipped
+            li.list-group-item
+                strong  Order date: 
+                span.float-right
+                | 09/02/2020
+                | 05:19AM
+            li.list-group-item
+                strong  Order ID: 
+                span.float-right 5e3f02b6aa056411043e9f88
+            li.list-group-item
+                strong  Payment Gateway ref: 
+                span.float-right ch_1G9yMrL7TBqK1az8Paf1W4eC
+            li.list-group-item
+                strong  Payment Gateway: 
+                span.float-right Stripe
+            li.list-group-item
+                strong  Payment Message: 
+                span.float-right
+                | Payment
+                | complete.
+            li.list-group-item
+                strong  Order net amount: 
+                span.float-right &pound;49.95
+            li.list-group-item
+                strong  Order shipping amount: 
+                span.float-right &pound;25.00
+            li.list-group-item
+                strong  Order total amount: 
+                span.float-right &pound;74.95
+            li.list-group-item
+                strong  Email address: 
+                span.float-right mario@gmail.com
+            li.list-group-item
+                strong  First name: 
+                span.float-right ds
+            li.list-group-item
+                strong  Last name: 
+                span.float-right df
+            li.list-group-item
+                strong  Address 1: 
+                span.float-right df
+            li.list-group-item
+                strong  Address 2: 
+                span.float-right asd
+            li.list-group-item
+                strong  Country: 
+                span.float-right
+                | Faroe
+                | Islands
+            li.list-group-item
+                strong  State: 
+                span.float-right adw
+            li.list-group-item
+                strong  Postcode: 
+                span.float-right 2452
+            li.list-group-item
+                strong  Phone number: 
+                span.float-right 2323
+            li.list-group-item
+                strong  Order type: 
+                span.float-right Single
+            li.list-group-item
+                strong  Order comment: 
+                span.float-right
+            li.list-group-item &nbsp;
+            li.list-group-item
+                strong.text-info Products ordered
+            li.list-group-item
+                | 1 x Hudderton Backpack
+                | &gt; &nbsp;
+                span.text-warning  Options: 
+                |                             (
+                |                             )
+                .float-right &pound;49.95
+            input#order_id(type='hidden', value='5e3f02b6aa056411043e9f88')
+        br

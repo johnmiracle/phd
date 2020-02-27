@@ -1,11 +1,15 @@
 const bcrypt = require("bcryptjs");
-const product = require("../models/Products");
-const category = require("../models/Category");
+const Product = require("../models/Products");
+const Category = require("../models/Category");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const Order = mongoose.model("Order");
 const cloudinary = require("cloudinary").v2;
 const { check, validationResult } = require("express-validator");
+const uploadFile = require("../config/multer");
+
+const backURL = req => req.header("Referer");
 
 // require("../config/cloudinary");
 
@@ -17,37 +21,58 @@ cloudinary.config({
   api_secret: process.env.api_secret
 });
 
-exports.addproduct = async (req, res, next) => {
-  const result = await cloudinary.uploader.upload(req.file.path);
+exports.addproduct = (req, res, next) => {
+  // 1. set details
+  const details = {
+    destination: "./public/uploads",
+    field: "myFile",
+    fileLimit: 500000,
+    allowedExts: "jpg|jpeg|png"
+  };
 
-  //create an New product
-  const Product = new product();
-  Product.name = req.body.name;
-  Product.category = req.body.category;
-  Product.price = req.body.price;
-  Product.imageUrl = result.secure_url;
-  Product.description = req.body.description;
-  Product.inStock = req.body.inStock;
+  // 2. initialize upload
+  const upload = uploadFile(req, details);
 
-  await Product.save(function(err) {
-    // handle errors
+  // 3. handle upload
+  upload(req, res, err => {
+    let error;
     if (err) {
-      req.flash("danger", err.message);
-      console.log(err);
-      res.redirect("/admin/add-product");
+      error = err.message;
     } else {
-      // no errors, return success message
+      // check if file is not uploaded
+      if (req.file == undefined) {
+        error = "no image was uploaded";
+      }
+    }
+
+    // if error, set flash message and redirect
+    if (!!error) {
+      req.flash("danger", error);
+      res.redirect(backURL(req));
+    } else {
+      // no errors, handle path
+      const imagepath = `/${req.file.path
+        .split("\\")
+        .slice(1)
+        .join("/")}`;
+      // save path in db
+      const product = new Product();
+      product.name = req.body.name;
+      product.category = req.body.category;
+      product.price = req.body.price;
+      product.description = req.body.description;
+      product.inStock = req.body.inStock;
+      product.imageUrl = imagepath;
+      Product.save();
       req.flash("success", "Product has been added Successfully");
       // redirect to the add category view
       res.redirect("/admin/add-product");
     }
-  }).catch(err => {
-    req.flash("Danger", "Error upoading product, Try again");
   });
 };
 
 exports.addproductpage = (req, res, next) => {
-  category.find({}, (err, categories) => {
+  Category.find({}, (err, categories) => {
     if (err) {
       req.flash("Danger", "Unable to load Categories");
     } else {
@@ -62,11 +87,11 @@ exports.addcategorypage = (req, res, next) => {
 
 exports.addcategory = (req, res, next) => {
   // create new category instance
-  const Category = new category();
+  const category = new Category();
   // retrieve the Category name from the data sent over from the client
-  Category.name = req.body.name;
-  Category.description = req.body.description;
-  Category.author = req.body.author;
+  category.name = req.body.name;
+  category.description = req.body.description;
+  category.author = req.body.author;
 
   // save the category name to mongo
   Category.save(err => {
@@ -156,38 +181,35 @@ exports.adminRegister = async (req, res, next) => {
   }
 };
 
-exports.adminHome = (req, res, next) => {
-  res.render("adminHome");
+exports.adminHome = async (req, res, next) => {
+  const stats = await User.count({});
+  const orders = await Order.count({ orderStatus: "created" });
+  const products = await Product.count({});
+  res.render("adminHome", { stats, orders, products });
 };
 
-exports.products = (req, res, next) => {
-  const Product = product.findById(req.body).populate("Category");
-  console.log(req.params._id);
-  product
-    .find()
-    .select(req.params.id)
-    .then(products => res.render("admin-product-view", { products }))
-    .catch(err => console.log(err));
+exports.products = async (req, res) => {
+  const products = await Product.find({}).populate("category");
+  res.render("admin-product-view", { products });
 };
 
 exports.viewProductEdit = (req, res, next) => {
-  product.findById(req.params.id, function(err, product) {
+  Product.findById(req.params.id, function(err, product) {
     if (err) return console.log(err);
     res.render("admin-product-edit", { product });
   });
 };
 
 exports.productEdit = (req, res, next) => {
-  let Product = [];
-  Product.name = req.body.name;
-  // Product.category = req.body.category.name;
-  Product.price = req.body.price;
-  Product.description = req.body.description;
-  Product.inStock = req.body.inStock;
+  let product = [];
+  product.name = req.body.name;
+  product.price = req.body.price;
+  product.description = req.body.description;
+  product.inStock = req.body.inStock;
 
   let query = { _id: req.params.id };
 
-  product.update(query, Product, function(err) {
+  Product.update(query, product, function(err) {
     // handle errors
     if (err) {
       req.flash("danger", err.message);
@@ -208,7 +230,7 @@ exports.productEdit = (req, res, next) => {
 
 exports.product_delete = (req, res, next) => {
   let query = { _id: req.params.id };
-  product.findByIdAndRemove(query, function(err) {
+  Product.findByIdAndRemove(query, function(err) {
     if (err) {
       res.redirect("/admin/all-products");
       req.flash("Error", err.message);
@@ -219,7 +241,7 @@ exports.product_delete = (req, res, next) => {
 };
 
 exports.viewCategory = (req, res, next) => {
-  category.find({}, (err, categories) => {
+  Category.find({}, (err, categories) => {
     if (err) {
       req.flash("Danger", "Unable to load Categories");
     } else {
@@ -229,44 +251,38 @@ exports.viewCategory = (req, res, next) => {
 };
 
 exports.viewCategoryEdit = (req, res, next) => {
-  category.findById(req.params.id, function(err, category) {
+  Category.findById(req.params.id, function(err, category) {
     if (err) return console.log(err);
     res.render("admin-category-edit", { category });
   });
 };
 
 exports.categoryEdit = (req, res, next) => {
-  let Category = [];
-  Category.name = req.body.name;
-  Category.description = req.body.description;
+  let category = [];
+  category.name = req.body.name;
+  category.description = req.body.description;
 
   let query = { _id: req.params.id };
-  category
-    .update(query, Category, function(err) {
-      // handle errors
-      if (err) {
-        req.flash("danger", err.message);
-        console.log(err);
-        res.redirect("/admin/all-categories");
-      }
-      if (category.Category === req.body) {
-        res.redirect("/admin/all-categories");
-        req.flash("Success", "Category has been updated Successfully");
-      } else {
-        // no errors, return success message
-        req.flash("Success", "Category has been updated Successfully");
-        // redirect to the add category view
-        res.redirect("/admin/all-categories");
-      }
-    })
-    .catch(err => {
-      req.flash("Danger", "Error updating product, Try again");
-    });
+  Category.update(query, category, function(err) {
+    // handle errors
+    if (err) {
+      req.flash("danger", err.message);
+      console.log(err);
+      res.redirect("/admin/all-categories");
+    } else {
+      // no errors, return success message
+      req.flash("Success", "Category has been updated Successfully");
+      // redirect to the add category view
+      res.redirect("/admin/all-categories");
+    }
+  }).catch(err => {
+    req.flash("Danger", "Error updating product, Try again");
+  });
 };
 
 exports.category_delete = (req, res, next) => {
   let query = { _id: req.params.id };
-  category.findByIdAndRemove(query, function(err) {
+  Category.findByIdAndRemove(query, function(err) {
     if (err) {
       res.redirect("/admin/all-categories");
       req.flash("Error", err.message);
@@ -286,6 +302,84 @@ exports.viewUsers = (req, res, next) => {
   });
 };
 
+exports.all_Orders = (req, res, next) => {
+  Order.find({}, (err, results) => {
+    if (err) {
+      req.flash("Danger", "Unable to load Orders");
+    } else {
+      res.render("admin_orders", { results });
+    }
+  });
+};
+exports.view_Order = async (req, res, next) => {
+  const result = await Order.findById(req.params.id).populate("user");
+  console.log(result);
+  res.render("admin_Order", { result });
+};
+
+exports.order_update = (req, res) => {
+  let order = [];
+  order.orderStatus = req.body.orderStatus;
+
+  let query = { _id: req.params.id };
+
+  Order.update(query, order, function(err) {
+    // handle errors
+    if (err) {
+      req.flash("danger", err.message);
+      console.log(err);
+      res.redirect("/admin/orders");
+    }
+    if (product.Product === req.body) {
+      res.redirect("/admin/orders");
+      req.flash("Success", "Order has been updated Successfully");
+    } else {
+      // no errors, return success message
+      req.flash("Success", "Order has been updated Successfully");
+      // redirect to the add category view
+      res.redirect("/admin/orders");
+    }
+  });
+};
+
+exports.order_delete = (req, res, next) => {
+  let query = { _id: req.params.id };
+  Order.findByIdAndRemove(query, function(err) {
+    if (err) {
+      res.redirect("/admin/orders");
+      req.flash("Error", err.message);
+    }
+    req.flash("Deleted successfully!");
+    res.redirect("/admin/orders");
+  });
+};
+
+exports.search = async (req, res) => {
+  const searchTerm = req.params.search;
+  const ordersIndex = req.app.ordersIndex;
+
+  const lunrIdArray = [];
+  ordersIndex.search(searchTerm).forEach(id => {
+    lunrIdArray.push(common.getId(id.ref));
+  });
+
+  // we search on the lunr indexes
+  const orders = await Order.find({ _id: { $in: lunrIdArray } }).toArray();
+
+  // If API request, return json
+  if (req.apiAuthenticated) {
+    res.status(200).json({
+      orders
+    });
+    return;
+  }
+
+  res.render("admin_orders", {
+    orders: orders,
+    session: req.session,
+    searchTerm: searchTerm
+  });
+};
 exports.logout = (req, res, next) => {
   req.logout();
   req.flash("success", "You've successfully logged out");

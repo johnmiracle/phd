@@ -10,7 +10,7 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
-const validate = require("express-validator");
+const Category = require("./models/Category");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -89,6 +89,18 @@ app.use((req, res, next) => {
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
   next();
+});
+
+app.use((req, res, next) => {
+  /* search for all categories */
+  Category.find({}, (err, categories) => {
+    /*if there is an error return it */
+    if (err) return next(err);
+
+    res.locals.categories = categories;
+
+    next();
+  });
 });
 
 app.use("/", indexRouter);

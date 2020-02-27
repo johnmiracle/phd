@@ -1,0 +1,100 @@
+extends ./layout/admin/base
+include ./mixins/_flash-messages
+
+block content
+    .col-sm-12
+        br
+        h2 View Order
+    br
+    .order-layout.col-md-12
+        +flashMessages()
+        .row
+          .col-md-12.bottom-pad-20
+            a.btn.btn-outline-info.float-right(href='/admin/orders') Go Back
+        br
+        ul.list-group
+          li.list-group-item.list-group-input-pad
+            strong  Order status: 
+              span.text-success.float-right #{result.orderStatus}
+              .float-right.col-md-2
+                form(method='POST', action="/admin/update/"+result._id)
+                  select#orderStatus.form-control(name='orderStatus')
+                    option Completed
+                    option Paid
+                    option Pending
+                    option Cancelled
+                    option Declined
+                    option Shipped
+                a#orderStatusUpdate.btn.btn-outline-success.float-left(href='/admin/update/'+result._id)
+                  | Update
+                  | status
+          li.list-group-item
+            strong  Order date: 
+            span.float-right
+              | #{result.orderDate}
+          li.list-group-item
+            strong  Order ID: 
+            span.float-right #{result.orderPaymentId}
+          li.list-group-item
+            strong  Payment Gateway ref: 
+            span.float-right ch_1G9yMrL7TBqK1az8Paf1W4eC
+          li.list-group-item
+            strong  Payment Gateway: 
+            span.float-right Stripe
+          li.list-group-item
+            strong  Payment Message: 
+            span.float-right
+              | Payment
+              | complete.
+          li.list-group-item
+            strong  Order net amount: 
+            span.float-right &pound;49.95
+          li.list-group-item
+            strong  Order shipping amount: 
+            span.float-right &pound;25.00
+          li.list-group-item
+            strong  Order total amount: 
+            span.float-right #{result.orderProducts.totalPrice}
+          li.list-group-item
+            strong  Email address: 
+            span.float-right #{result.orderEmail}
+          li.list-group-item
+            strong  Full Name: 
+            span.float-right #{result.orderNames}
+          li.list-group-item
+            strong  Address 1: 
+            span.float-right #{result.orderAddress}
+          li.list-group-item
+            strong  Country: 
+            span.float-right
+              | #{result.orderCountry}
+          li.list-group-item
+            strong  State: 
+            span.float-right #{result.orderState}
+          li.list-group-item
+            strong  Postcode: 
+            span.float-right #{result.orderPostcode}
+          li.list-group-item
+            strong  Phone number: 
+            span.float-right #{result.orderPhone}
+          li.list-group-item
+            strong  Order type: 
+            span.float-right Single
+          li.list-group-item
+            strong  Order comment: 
+            span.float-right
+          li.list-group-item &nbsp;
+          li.list-group-item
+            strong  Full Name: 
+            span.float-right #{result.user.firstName} #{result.user.lastName}
+          li.list-group-item
+            strong.text-info Products ordered
+          li.list-group-item
+            | #{result.orderProducts}
+            | &gt; &nbsp;
+            span.text-warning  Options: 
+            |                             (
+            |                             )
+            .float-right #{result.orderProducts.totalPrice}
+        input#order_id(type='hidden', value='5e3f02b6aa056411043e9f88')
+    br

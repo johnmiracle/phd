@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arvo">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/stylesheets/style.css" type="text/css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="template-pages">
+        <div class="container">
+            <di v class="row ds-admin-panel">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 hidden-xs">
+                    <div class="about-header">
+                        <img src="https://www.gravatar.com/avatar/fd63280d534e8130e0853148e7019db0?d=retro&amp;s=200"
+                            class="img-responsive" alt="">
+                        <p class="store-name">miracle Anaje</p>
+                    </div>
+                    <ul class="printivo">
+                        <style type="text/css">
+                            .title {
+                                font-weight: bold;
+                                margin-top: 15px;
+                            }
+
+                            .title:first-of-type {
+                                margin-top: 0;
+                            }
+                        </style>
+                        <li><a href="/members/profile" class="page-active">Profile</a></li>
+                        <li><a href="/addresses">Addresses</a></li>
+                        <li><a href="/wallet">My Wallet</a></li>
+                        <li><a href="/rewards">Rewards</a></li>
+                        <li><a href="/orders">Order History</a></li>
+                        <li><a href="/saved-items">Saved Designs</a></li>
+                        <li><a href="/design-requests">Design Requests</a></li>
+                        <li><a href="/members/change-password">Change Password</a></li>
+                        <li id="store">
+                            <a href="/sell/miracleanaje%40yahoo.com">Set up store</a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 dash-drop">
+                    <strong>Menu</strong>
+                    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                        <option value="/members/profile">Profile</option>
+                        <option value="/addresses">Addresses</option>
+                        <option value="/orders">Order History</option>
+                        <option value="/saved-items">Saved Designs
+                        </option>
+                        <option value="/design-requests">Design Requests
+                        </option>
+                        <option value="/members/change-password">Change
+                            Password
+                        </option>
+                        <option value="/sell/miracleanaje%40yahoo.com">
+                            Set up store
+                        </option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <p class="about-header bold-font">My Profile</p>
+                    <div class="acct-info">
+                        <h4>Account Information</h4>
+                        <p><span>Name:</span> miracle Anaje<br>
+                            <span>Email:</span> miracleanaje@yahoo.com<br>
+                            <span>Phone No:</span> 08131179082<br>
+                            <span>Date of Birth:</span> <br>
+                            <span>Date Registered:</span> Nov 25th, 2019<br>
+                        </p>
+                    </div>
+                    <div class="acct-info">
+                        <h4>Shipping Information</h4>
+                        <p>
+                            No Shipping Address has been added.
+                        </p>
+                    </div>
+                    <br>
+                    <div class="clearfix">
+                        <a href="/members/edit" class="btn btn-primary blue-btn"><i class="fa fa-edit"></i> Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

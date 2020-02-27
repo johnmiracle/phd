@@ -24,11 +24,12 @@ head
 section
   .container
     nav.navbar.navbar-expand-lg.navbar-light
-      a.navbar-brand(href='/') Logo
+      a.navbar-brand(href='/') 
+        img(src="/img/phd-1 design.png", alt="Logo" width='65%')
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
-        ul.navbar-nav.centered
+        ul.navbar-nav.centered.m-auto
           li.nav-item.active
             a.nav-link(href='/')
               | Home 
@@ -47,7 +48,7 @@ section
                 | #{user.firstName}
               .dropdown-menu
                 a.dropdown-item.nav-drop(href='/users/profile') My Profile
-                a.dropdown-item.nav-drop(href='/userOrders') Order History
+                a.dropdown-item.nav-drop(href='/users/orders') Order History
                 a.dropdown-item.nav-drop(href='/logout') Log Out
              li.nav-item
                 a.nav-link(href='/cart')
@@ -62,7 +63,7 @@ section
                 a.nav-link(href='/cart')
                   i.fa.fa-shopping-cart Cart
                   if session.cart
-                    span.badge= session.cart.totalQty
+                    span.badge.badge-primary= session.cart.totalQty
           
 //
   -------------------------
@@ -91,7 +92,8 @@ section.sect-1
               | All Products
               i.fa.fa-caret-down
             .dropdown-menu(aria-labelledby='navbarDropdown')
-              a.dropdown-item(href='/logo') Logo Development
+              //- each category, i in categories
+              //-   a.dropdown-item(href='/logo' value=category.id) #{category.name}
               a.dropdown-item(href='/stationary') Corporate Stationary 
               a.dropdown-item(href='/gift') Corporate Gift
               a.dropdown-item(href='/promotionalItem') Promotional items
@@ -202,4 +204,4 @@ script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
 //- script(type='text/javascript', src='assets/plugins/back-to-top.js')
-//- script(src='../js/main.js')
+script(src='../js/main.js')

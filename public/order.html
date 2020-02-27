@@ -1,0 +1,249 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arvo">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/stylesheets/style.css" type="text/css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid content-body h-100" id="container">
+        <div class="row h-100">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="/admin"><img class="sidebar-brand" src="../public/img/New Phd logo.png"
+                                    width="100%"></a>
+                            <a href="#" data-toggle="modal" data-target="#globalSearchModal"
+                                class="sidebar-search text-muted"><svg width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="">
+                                    <use xlink:href="/dist/feather-sprite.svg#search"></use>
+                                </svg></a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="info">
+                                <h5 class="name">
+                                    Femi Odunlami
+                                </h5>
+                            </div>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">
+                                <i class="fa fa-bar-chart">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-bar-chart">
+                                        <use xlink:href="/dist/feather-sprite.svg#bar-chart"></use>
+                                    </svg> &nbsp;
+                                    Dashboard
+                                </i>
+                            </a>
+                        </li>
+                        <h6
+                            class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Manage</span>
+                        </h6>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/admin/products">
+                                <i class="fa fa-tags">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="fa fa-tag">
+                                        <use xlink:href="/dist/feather-sprite.svg#tag"></use>
+                                    </svg> &nbsp;
+                                    Products
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item sidebar-addon">
+                            <a class="nav-link" href="/admin/orders">
+                                <i class="fa fa-first-order">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="">
+                                        <use xlink:href="/dist/feather-sprite.svg#package"></use>
+                                    </svg> &nbsp;
+                                    Orders
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/customers">
+                                <i class="fa fa-users">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="">
+                                        <use xlink:href="/dist/feather-sprite.svg#users"></use>
+                                    </svg> &nbsp;
+                                    Customers
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item sidebar-addon">
+                            <a class="nav-link sidebar-link" href="/admin/users">
+                                <i class="fa fa-user">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="">
+                                        <use xlink:href="/dist/feather-sprite.svg#user"></use>
+                                    </svg> &nbsp;
+                                    Users
+                                </i>
+                            </a>
+                            <a class="sidebar-link-addon text-muted" href="/admin/user/new">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                    <use xlink:href="/dist/feather-sprite.svg#plus"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Settings</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/settings">
+                                <i class="fa fa-sliders">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders">
+                                        <use xlink:href="/dist/feather-sprite.svg#sliders"></use>
+                                    </svg> &nbsp;
+                                    General settings
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/settings/menu">
+                                <i class="fa fa-bars">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="">
+                                        <use xlink:href="/dist/feather-sprite.svg#menu"></use>
+                                    </svg> &nbsp;
+                                    Menu
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/settings/pages">
+                                <i class="fa fa-file-text">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-file-text">
+                                        <use xlink:href="/dist/feather-sprite.svg#file-text"></use>
+                                    </svg> &nbsp;
+                                    Static pages
+                                </i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/settings/menu">
+                                <i class="fa fa-sign-out">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="">
+                                        <use xlink:href="/dist/feather-sprite.svg#menu"></use>
+                                    </svg> &nbsp;
+                                    Logout
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="col-sm-12">
+                    <h2>View Order</h2>
+                </div>
+                <div class="order-layout col-md-12">
+                    <div class="row">
+                        <div class="col-md-12 bottom-pad-20">
+                            <button id="orderStatusUpdate" class="btn btn-outline-success float-left">Update
+                                status</button>
+                            <a href="/admin/orders" class="btn btn-outline-info float-right">Go Back</a>
+                        </div>
+                    </div>
+                    <br>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-input-pad">
+                            <strong> Order status: </strong><span class="text-success float-right">Paid</span>
+                            <div class="float-right col-md-2">
+                                <select class="form-control" id="orderStatus">
+                                    <option>Completed</option>
+                                    <option>Paid</option>
+                                    <option>Pending</option>
+                                    <option>Cancelled</option>
+                                    <option>Declined</option>
+                                    <option>Shipped</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="list-group-item"><strong> Order date: </strong><span class="float-right">09/02/2020
+                                05:19AM</span></li>
+                        <li class="list-group-item"><strong> Order ID: </strong><span
+                                class="float-right">5e3f02b6aa056411043e9f88</span></li>
+                        <li class="list-group-item"><strong> Payment Gateway ref: </strong><span
+                                class="float-right">ch_1G9yMrL7TBqK1az8Paf1W4eC</span></li>
+                        <li class="list-group-item"><strong> Payment Gateway: </strong><span
+                                class="float-right">Stripe</span></li>
+                        <li class="list-group-item"><strong> Payment Message: </strong><span class="float-right">Payment
+                                complete.</span></li>
+                        <li class="list-group-item"><strong> Order net amount: </strong><span
+                                class="float-right">£49.95</span></li>
+                        <li class="list-group-item"><strong> Order shipping amount: </strong><span
+                                class="float-right">£25.00</span></li>
+                        <li class="list-group-item"><strong> Order total amount: </strong><span
+                                class="float-right">£74.95</span></li>
+                        <li class="list-group-item"><strong> Email address: </strong><span
+                                class="float-right">mario@gmail.com</span></li>
+                        <li class="list-group-item"><strong> First name: </strong><span class="float-right">ds</span>
+                        </li>
+                        <li class="list-group-item"><strong> Last name: </strong><span class="float-right">df</span>
+                        </li>
+                        <li class="list-group-item"><strong> Address 1: </strong><span class="float-right">df</span>
+                        </li>
+                        <li class="list-group-item"><strong> Address 2: </strong><span class="float-right">asd</span>
+                        </li>
+                        <li class="list-group-item"><strong> Country: </strong><span class="float-right">Faroe
+                                Islands</span></li>
+                        <li class="list-group-item"><strong> State: </strong><span class="float-right">adw</span></li>
+                        <li class="list-group-item"><strong> Postcode: </strong><span class="float-right">2452</span>
+                        </li>
+                        <li class="list-group-item"><strong> Phone number: </strong><span
+                                class="float-right">2323</span>
+                        </li>
+                        <li class="list-group-item"><strong> Order type: </strong><span
+                                class="float-right">Single</span>
+                        </li>
+                        <li class="list-group-item"><strong> Order comment: </strong><span class="float-right"></span>
+                        </li>
+
+                        <li class="list-group-item">&nbsp;</li>
+                        <li class="list-group-item"><strong class="text-info">Products ordered</strong></li>
+                        <li class="list-group-item">
+                            1 x Hudderton Backpack
+                            &nbsp; &gt; &nbsp;
+                            <span class="text-warning"> Options: </span>
+                            (
+                            )
+                            <div class="float-right">£49.95</div>
+                        </li>
+                    </ul>
+                    <input type="hidden" id="order_id" value="5e3f02b6aa056411043e9f88">
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

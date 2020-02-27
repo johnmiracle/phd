@@ -3,39 +3,34 @@ include ./mixins/_flash-messages
 
 block content
     section
-      .container-fluid
+      .container
         .row.blk-pro
-          .col-md-1
-          .col-sm-5.col-md-4
+          .col-md-3
+          .col-md-6
             img.img-circle.img-responsive.img-center(src='https://www.gravatar.com/avatar/fd63280d534e8130e0853148e7019db0?d=retro&s=200', alt='')
             br
             br
-            p
-              b First Name:
-              |  #{user.firstName}
-            p
+            h6
+              b First Name: 
+              | #{user.firstName}
+            br
+            h6
               b Last Name:
               |  #{user.lastName}
-            p
+            br
+            h6
               b Email:
               | #{user.email}
-            p
+            br
+            h6
               b Mobile Number:
               |  #{user.phone}
-            p
+            br
+            h6
               | Address: #{user.address}
+            br
             a.btn.btn-primary(href='/users/edit-profile') Edit Profile
-          .col-md-6
-            h2#heading.text-center Order History
-            table.table.table-striped.sticky-header
-              thead
-                tr
-                  th Item Name
-                  th Paid: 
-                tbody
-                  tr
-                    td bags
-                    td Paid
+          .col-md-3
 
     
 

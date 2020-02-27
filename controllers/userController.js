@@ -48,17 +48,17 @@ exports.memberRegister = async (req, res, next) => {
       user.save(function(err) {
         if (err) {
           console.log(err);
-        } else
-          (req, res, next) => {
-            if (req.session.oldUrl) {
-              const oldUrl = req.session.oldUrl;
-              req.session.oldUrl = null;
-              res.redirect(oldUrl);
-            } else {
-              req.flash("success", "Registration is successfull, Please Login");
-              res.redirect("/login");
-            }
-          };
+        } else {
+          req.flash("success", "Registration is successfull, Please Login");
+          res.redirect("/login");
+        }
+        (req, res, next) => {
+          if (req.session.oldUrl) {
+            const oldUrl = req.session.oldUrl;
+            req.session.oldUrl = null;
+            res.redirect(oldUrl);
+          }
+        };
       });
     });
   }
@@ -70,9 +70,15 @@ exports.memberHome = (req, res, next) => {
 exports.memberProfile = (req, res, next) => {
   res.render("memberProfile");
 };
-exports.memberOrders = (req, res, next) => {
-  res.render("");
-};
+
 exports.memberProfileEdit = (req, res, next) => {
   res.render("profile-edit");
+};
+
+exports.order_page = (req, res, next) => {
+  res.render("orders_page");
+};
+
+exports.view_order = (req, res, next) => {
+  res.render("order");
 };

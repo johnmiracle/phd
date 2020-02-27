@@ -3,23 +3,55 @@ const mongoose = require("mongoose");
 const Orderschema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: "User"
   },
-  cart: {
-    type: Object,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
-  name: {
+  orderPaymentId: {
     type: String,
     require: true
   },
-  paymentId: {
+  orderPaymentGateway: {
+    type: String,
+    require: true
+  },
+  orderProducts: {
+    type: Object,
+    required: true
+  },
+  orderNames: {
+    type: String,
+    require: true
+  },
+  orderAddress: {
     type: String,
     required: true
+  },
+  orderEmail: {
+    type: String,
+    required: true
+  },
+  orderCountry: {
+    type: String,
+    required: true
+  },
+  orderState: {
+    type: String,
+    required: true
+  },
+  orderPostcode: {
+    type: String,
+    required: true
+  },
+  orderTotal: {
+    type: Number,
+    format: "amount"
+  },
+  orderPhone: Number,
+  orderStatus: {
+    type: String
+  },
+  orderDate: {
+    type: Date,
+    default: Date.now
   }
 });
 

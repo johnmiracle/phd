@@ -24,50 +24,57 @@ block content
                         .col-auto
                           p
                             b #{user.email}
-                      .row.mt-4
-                        .col
-                          p.text-muted.mb-2 PAYMENT DETAILS
-                          hr.mt-0
-                      form(method='POST', action="")
+                      form(method='POST', action="/pay")
                         .form-group
                           label.small.text-muted.mb-1(for='NAME')
-                            | NAME ON
-                            | CARD
-                          input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='BBBootstrap Team')
+                            | FULL NAME 
+                          input.form-control.form-control-sm(type='text', name='shipFullname', aria-describedby='helpId', placeholder='Name' required='')
                         .form-group
                           label.small.text-muted.mb-1(for='NAME')
-                            | CARD
-                            | NUMBER
-                          input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='4534 5555 5555 5555')
+                            | ADDRESS
+                          input.form-control.form-control-sm(type='text', name='shipAddr1', aria-describedby='helpId', placeholder='Address' required='')
+                        .form-group
+                          label.small.text-muted.mb-1(for='NAME')
+                            | EMAIL
+                          input.form-control.form-control-sm(type='email', name='shipEmail', aria-describedby='helpId', placeholder='Your email' required='')
                         .row.no-gutters
                           .col-sm-6.pr-sm-2
                             .form-group
                               label.small.text-muted.mb-1(for='NAME')
-                                | VALID
-                                | THROUGH
-                              input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='06/21')
+                                | COUNTRY
+                              input.form-control.form-control-sm(type='text', name='shipCountry', aria-describedby='helpId', placeholder='Country' required='')
                           .col-sm-6
                             .form-group
                               label.small.text-muted.mb-1(for='NAME')
-                                | CVC
-                                | CODE
-                              input#NAME.form-control.form-control-sm(type='text', name='NAME', aria-describedby='helpId', placeholder='183')
+                                | STATE
+                              input.form-control.form-control-sm(type='text', name='shipState', aria-describedby='helpId', placeholder='State' required='')
+                        .row.no-gutters
+                          .col-sm-6.pr-sm-2
+                            .form-group
+                              label.small.text-muted.mb-1(for='NAME')
+                                | POST CODE
+                              input.form-control.form-control-sm(type='text', name='shipPostcode', aria-describedby='helpId', placeholder='Post Code' required='')
+                          .col-sm-6
+                            .form-group
+                              label.small.text-muted.mb-1(for='NAME')
+                                | MOBILE NUMBER
+                              input.form-control.form-control-sm(type='Number', name='shipPhoneNumber', aria-describedby='helpId', placeholder='Phone' required='')  
                         .row.mb-md-5
                           .col
-                            button.btn.btn-lg.btn-block(type='submit', name='sumbit', id='') PURCHASE ₦#{`${totalPrice}`}
+                            button#money.btn.btn-lg.btn-block(type='submit', name='sumbit' onload="currencyFormat(money)") PURCHASE ₦#{`${totalPrice}`}
                 .col-md-5.mobile
                   .card.border-0
                     .card-header.card-2
                       p.card-text.text-muted.mt-md-4.mb-2.space
                         | YOUR ORDER 
-                        span.small.text-muted.ml-2.cursor-pointer(href='') EDIT SHOPPING BAG
+                        span.small.text-muted.ml-2.cursor-pointer(href='/cart') EDIT SHOPPING BAG
                       hr.my-2
                     .card-body.pt-0
                       .row.justify-content-between
                         each product in products
                           .col-auto.col-md-7
                             .media.flex-column.flex-sm-row
-                              img.img-fluid(src='https://i.imgur.com/6oHix28.jpg', width='62', height='62')
+                              img.img-fluid(src=''+product.item.imageUrl, width='30%', height='70')
                               .media-body.my-auto
                                 .row
                                   .col-md-12
@@ -97,10 +104,18 @@ block content
                               p
                                 b Total (₦)
                             .flex-sm-col.col-auto
-                              p.mb-1
-                                b ₦#{`${totalPrice}`}
+                              p.num.mb-1
+                                b#money ₦#{`${totalPrice}`}
                           hr.my-0
       else  
         .card-content
-          h4.center No Items In Cart
+         center
+            i.fa.fa-shopping-cart
+              h2
+                | Cart empty
+        script.
+          function currencyFormat(num) {
+            return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+          }
+
 

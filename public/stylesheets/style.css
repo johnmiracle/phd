@@ -422,6 +422,26 @@ a {
   color: #aaa;
 }
 
+.img-circle{
+  width: 15% !important;
+}
+
+.orderFilter {
+  margin-top: 10px;
+}
+
+.sidebar {
+  background-color: #343a40;
+}
+
+.content-body {
+  background-color: #f8f9fa;
+}
+
+.name{
+  color: #ffff
+}
+
 .btn-lg,
 .form-control-sm:focus,
 .form-control-sm:active,
@@ -1183,7 +1203,7 @@ label {
   border: 1px solid grey;
   border-radius: 5px;
   padding: 30px;
-  display: flexbox;
+  /* display: flexbox; */
   margin: auto;
   margin-top: 50px;
 }
@@ -1566,6 +1586,73 @@ textarea {
 /* =========Footer section===========*/
 /* ==================================*/
 /* ==================================*/
+
+/* ==================================*/
+/* ==================================*/
+/* =========Admin section===========*/
+/* ==================================*/
+/* ==================================*/
+table.table {
+  width: 100%;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.25em;
+}
+
+.table tr {
+  border-bottom: 1px solid #ddd;
+}
+td.edit-buttons {
+  text-align: right;
+}
+button {
+  border-radius: 3px;
+  border: none;
+  margin: 0 0.25em;
+  transition: all 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 4px rgba(3, 3, 3, 0.8);
+  opacity: 0.9;
+}
+
+button.edit {
+  background: #6f9;
+}
+button.delete {
+  background: #f69;
+}
+
+@media screen and (max-width: 800px) {
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em 0;
+    border: 1px solid rgba(3, 3, 3, 0.2);
+  }
+  td,
+  th {
+    flex: 1 1 150px;
+    border: 0.5px solid rgba(3, 3, 3, 0.2);
+  }
+  td.edit-buttons,
+  td.empty {
+    flex: 1 0 90%;
+    text-align: center;
+  }
+}
+
+/* ==================================*/
+/* ==================================*/
+/* =========Admin section===========*/
+/* ==================================*/
+/* ==================================*/
+
 /* ==================================*/
 /* ==================================*/
 /* ====Media Query section===========*/

@@ -1,12 +1,14 @@
 const Product = require("../models/Products");
+const Category = require("../models/Category");
+const Order = require("../models/Order");
 const passport = require("passport");
 const Cart = require("../models/cart");
 const paypal = require("paypal-rest-sdk");
 
 paypal.configure({
-  mode: "sandbox",
-  client_id: "AWl8wDxinaB5LMTObH3D2Hn_SbQF_W0oOTqahfyW9xBAiCKfnqJMlpV6OtEdf4K_Kqg6vD98K2zU8YXQ",
-  client_secret: "ECB9MEcHx4svkN-d5t5Cx1ZMmHWlC00VZh4ITsOcICFJ8hARCG6K_qJCoWnj5JJ0DxhAkJC-88sdaDpu"
+  mode: "sandbox", //sandbox or live
+  client_id: "AQ1RbFqSEoUaR6Rwnf7EsIR5WI-mtnvX65u278qLaZECVIRZ_RNydua9Hy8WucTH8N-semXyEyslvJlz",
+  client_secret: "ECqZMxWWkjCU5aRO4h05-Nkl0D8mmj5Q5xtH3j3RcpWOdeA5BQU9oLv0Vqjm-yic5_8E1CvT1T7xDXTu"
 });
 
 exports.home = (req, res, next) => {
@@ -17,14 +19,20 @@ exports.banner = (req, res, next) => {
   res.render("Banners");
 };
 
-exports.brouchures = (req, res, next) => {
-  Product.find({}, (err, products) => {
-    if (err) {
-      req.flash("Danger", "Unable to load Products");
-    } else {
-      res.render("brouchures", { products });
-    }
-  });
+exports.brouchures = async (req, res, next) => {
+  const product = await Category.findById(req.params.id);
+  const products = await Product.find({ category: "5e1d9f48bf4cfc1f581246fd" }).populate("category");
+  console.log(products);
+  res.render("brouchures", { products });
+
+  // const products = await Product.find({}).populate("category");
+  // let category_product = [];
+  // if (products.category == "Custom Mugs") {
+  //   category_product.push(products);
+  //   console.log("miracle");
+  // }
+  // console.log(category_product);
+  // res.render("brouchures", { category_product });
 };
 
 exports.businesscards = (req, res, next) => {
@@ -66,7 +74,7 @@ exports.removeOne = (req, res, next) => {
 exports.cart = (req, res, next) => {
   if (!req.session.cart) {
     return res.render("cart", {
-      products: null || {},
+      products: null || {}
     });
   }
   const cart = new Cart(req.session.cart);
@@ -198,83 +206,247 @@ exports.checkout_action = (req, res, next) => {
       payment_method: "paypal"
     },
     redirect_urls: {
-      return_url: "http://localhost:3500",
+      return_url: "http://localhost:3500/checkout_return",
       cancel_url: "http://localhost:3500/checkout"
     },
 
     transactions: [
       {
-        item_list: {
-          items: [
-            {
-              name: "item",
-              sku: "item",
-              price: "1.00",
-              currency: "USD",
-              quantity: 1
-            }
-          ]
-        },
         amount: {
           total: cart.totalPrice,
-          currency: "NGN"
+          currency: "USD"
         },
-        description: cart.generateArray()
+        description: "Sales"
       }
     ]
   };
   paypal.payment.create(create_payment_json, function(error, payment) {
     if (error) {
-      throw error;
+      req.flash("Danger", "There was an error processing your payment. You have not been changed and can try again.");
+      res.redirect("/pay");
+      return;
     } else {
-      console.log("Create Payment Response");
-      console.log(payment);
+      for (let i = 0; i < payment.links.length; i++) {
+        if (payment.links[i].rel === "approval_url") {
+          res.redirect(payment.links[i].href);
+        }
+      }
+    }
+    // if there is no items in the cart then render a failure
+    if (!req.session.cart) {
+      req.flash("Danger", "The are no items in your cart. Please add some items before checking out");
+      res.redirect("/");
+      return;
+    }
+
+    //     // new order doc
+    const orderDoc = new Order({
+      user: req.user,
+      orderPaymentId: payment.id,
+      orderPaymentGateway: "Paypal",
+      orderTotal: req.session.totalCartAmount,
+      orderEmail: req.body.shipEmail,
+      orderNames: req.body.shipFullname,
+      orderAddress: req.body.shipAddr1,
+      orderCountry: req.body.shipCountry,
+      orderState: req.body.shipState,
+      orderPostcode: req.body.shipPostcode,
+      orderPhone: req.body.shipPhoneNumber,
+      orderStatus: payment.state,
+      orderDate: new Date(),
+      orderProducts: req.session.cart
+    });
+
+    if (req.session.orderId) {
+      // we have an order ID (probably from a failed/cancelled payment previosuly) so lets use that.
+
+      // send the order to Paypal
+      res.redirect(redirectUrl);
+    } else {
+      // no order ID so we create a new one
+      orderDoc.save((err, newDoc) => {
+        if (err) {
+          console.info(err.stack);
+        }
+
+        // get the new ID
+        const newId = newDoc.insertedId;
+
+        // set the order ID in the session
+        req.session.orderId = newId;
+
+        // set cart to empty
+        req.session.cart = null;
+
+        // send the order to Paypal
+        res.redirect(redirectUrl);
+      });
     }
   });
+
+  // setup the payment object
+  // const payment = {
+  //   intent: "sale",
+  //   payer: {
+  //     payment_method: "paypal"
+  //   },
+  //   redirect_urls: {
+  //     return_url: "http://localhost:3500/checkout_return",
+  //     cancel_url: "http://localhost:3500/checkout"
+  //   },
+  //   transactions: [
+  //     {
+  //       amount: {
+  //         total: cart.totalPrice,
+  //         currency: "USD"
+  //       },
+  //       description: "Sales"
+  //     }
+  //   ]
+  // };
+
+  // // create payment
+  // paypal.payment.create(payment, (error, payment) => {
+  //   if (error) {
+  //     req.flash("Danger", "There was an error processing your payment. You have not been changed and can try again.");
+  //     res.redirect("/pay");
+  //     return;
+  //   }
+  //   if (payment.payer.payment_method === "paypal") {
+  //     req.session.paymentId = payment.id;
+  //     let redirectUrl;
+  //     for (let i = 0; i < payment.links.length; i++) {
+  //       const link = payment.links[i];
+  //       if (link.method === "REDIRECT") {
+  //         redirectUrl = link.href;
+  //       }
+  //     }
+
+  //     // if there is no items in the cart then render a failure
+  //     if (!req.session.cart) {
+  //       req.flash("Danger", "The are no items in your cart. Please add some items before checking out");
+  //       res.redirect("/");
+  //       return;
+  //     }
+
+  //     // new order doc
+  //     const orderDoc = new Order({
+  //       orderPaymentId: payment.id,
+  //       orderPaymentGateway: "Paypal",
+  //       orderTotal: req.session.totalCartAmount,
+  //       orderEmail: req.body.shipEmail,
+  //       orderNames: req.body.shipFullname,
+  //       orderAddress: req.body.shipAddr1,
+  //       orderCountry: req.body.shipCountry,
+  //       orderState: req.body.shipState,
+  //       orderPostcode: req.body.shipPostcode,
+  //       orderPhone: req.body.shipPhoneNumber,
+  //       orderStatus: payment.state,
+  //       orderDate: new Date(),
+  //       orderProducts: req.session.cart
+  //     });
+
+  //     if (req.session.orderId) {
+  //       // we have an order ID (probably from a failed/cancelled payment previosuly) so lets use that.
+
+  //       // send the order to Paypal
+  //       res.redirect(redirectUrl);
+  //     } else {
+  //       // no order ID so we create a new one
+  //       orderDoc.save((err, newDoc) => {
+  //         if (err) {
+  //           console.info(err.stack);
+  //         }
+
+  //         // send the order to Paypal
+  //         res.redirect(redirectUrl);
+  //       });
+  //     }
+  //   }
+  // });
 };
 
-exports.checkoutPage = (req, res, next) => {
-  res.render("checkingout");
+exports.checkout_cancel = (req, res, next) => {
+  res.redirect("/checkout");
 };
 
-exports.check = (req, res, next) => {
-  const create_payment_json = {
-    intent: "sale",
-    payer: {
-      payment_method: "paypal"
-    },
-    redirect_urls: {
-      return_url: "http://localhost:3500",
-      cancel_url: "http://localhost:3500/checkout"
-    },
+exports.checkout_return = (req, res, next) => {
+  const payerId = req.query.PayerID;
+  const paymentId = req.session.paymentId;
 
+  const details = {
+    payer_id: payerId,
     transactions: [
       {
-        item_list: {
-          items: [
-            {
-              name: "item",
-              sku: "item",
-              price: "1.00",
-              currency: "USD",
-              quantity: 1
-            }
-          ]
-        },
         amount: {
-          total: "25.00",
-          currency: "NGN"
+          total: cart.totalPrice,
+          currency: "USD"
         },
-        description: "products and item"
+        description: "Sales"
       }
     ]
   };
-  paypal.payment.create(create_payment_json, function(error, payment) {
+  paypal.payment.execute(paymentId, details, (error, payment) => {
+    let paymentApproved = false;
+    let paymentMessage = "";
+    let paymentDetails = "";
     if (error) {
-      throw error;
+      paymentApproved = false;
+
+      if (error.response.name === "PAYMENT_ALREADY_DONE") {
+        paymentApproved = false;
+        paymentMessage = error.response.message;
+      } else {
+        paymentApproved = false;
+        paymentDetails = error.response.error_description;
+      }
+
+      // set the error
+      req.flash("Danger", error.response.error_description);
+      req.session.paymentApproved = paymentApproved;
+      req.session.paymentDetails = paymentDetails;
+
+      res.redirect("/cart");
+
     } else {
-      console.log("Create Payment Response");
-      console.log(payment);
+      const paymentOrderId = req.session.orderId;
+      let paymentStatus = "Approved";
+
+      // fully approved
+      if (payment.state === "approved") {
+        paymentApproved = true;
+        paymentStatus = "Paid";
+        paymentMessage = "Your payment was successfully completed";
+        paymentDetails = "<p><strong>Order ID: </strong>" + paymentOrderId + "</p><p><strong>Transaction ID: </strong>" + payment.id + "</p>";
+
+        // clear the cart
+        if (req.session.cart) {
+          req.session.cart = null;
+          req.session.orderId = null;
+          req.session.cart.totalPrice = 0;
+        }
+      }
+      res.flash("Success", "Your order has been placed");
+      res.redirect("/");
     }
+
+    // failed
+    if (payment.failureReason) {
+      paymentApproved = false;
+      paymentMessage = "Your payment failed - " + payment.failureReason;
+      paymentStatus = "Declined";
+    }
+
+    // update the order status
+    Order.update({ _id: process.getId(paymentOrderId) }, { $set: { orderStatus: paymentStatus } }, { multi: false }, (err, numReplaced) => {
+      if (err) {
+        console.info(err.stack);
+      }
+      Order.findOne({ _id: query.getId(paymentOrderId) }, (err, order) => {
+        if (err) {
+          console.info(err.stack);
+        }
+      });
+    });
   });
 };

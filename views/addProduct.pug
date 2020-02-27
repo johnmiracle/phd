@@ -34,12 +34,22 @@ block content
             .col-md-6
               .form-group
                 .btn.btn-primary.btn-sm.float-left
+                  p
+                    | The file size must not be more than
+                    span.txt-bold  500KB
+                    br
+                    | File format must be any of these:
+                    br
+                    span.txt-bold .jpg, .jpeg, .png 
                   span Choose file
                   input(type='file' name='myFile' onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" width='600px', height='500px' require='')
                   br
                 label
                   br
                   img#blah(alt='', width='500px', height='500px' src='404image')
+              br
+              br
+              br
               button.btn.btn-success(type='submit', value='Submit') Add product
               br 
               br
