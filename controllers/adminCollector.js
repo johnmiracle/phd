@@ -63,10 +63,19 @@ exports.addproduct = (req, res, next) => {
       product.description = req.body.description;
       product.inStock = req.body.inStock;
       product.imageUrl = imagepath;
-      Product.save();
-      req.flash("success", "Product has been added Successfully");
-      // redirect to the add category view
-      res.redirect("/admin/add-product");
+
+      Product.save(err => {
+        // handle errors
+        if (err) {
+          req.flash("danger", err);
+          res.redirect("/admin/add-product");
+        } else {
+          // no errors, return success message
+          req.flash("success", "Product has been added Successfully");
+          // redirect to the add product view
+          res.redirect("/admin/add-product");
+        }
+      });
     }
   });
 };
@@ -319,7 +328,7 @@ exports.view_Order = async (req, res, next) => {
 
 exports.order_update = (req, res) => {
   let order = [];
-  order.orderStatus = req.body.orderStatus;
+  order.orderStatus = req.body.status;
 
   let query = { _id: req.params.id };
 

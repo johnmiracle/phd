@@ -15,19 +15,20 @@ block content
         ul.list-group
           li.list-group-item.list-group-input-pad
             strong  Order status: 
-              span.text-success.float-right #{result.orderStatus}
+              span.text-success.float-right
               .float-right.col-md-2
                 form(method='POST', action="/admin/update/"+result._id)
-                  select#orderStatus.form-control(name='orderStatus')
-                    option Completed
-                    option Paid
-                    option Pending
-                    option Cancelled
-                    option Declined
-                    option Shipped
-                a#orderStatusUpdate.btn.btn-outline-success.float-left(href='/admin/update/'+result._id)
-                  | Update
-                  | status
+                  select#orderStatus.form-control(name='status')
+                    option(selected='')=result.orderStatus
+                    option(value='Completed') Completed
+                    option(value='Paid') Paid
+                    option(value='Pending') Pending
+                    option(value='Cancelled') Cancelled
+                    option(value='Delined') Declined
+                    option(value='Shipped') Shipped
+                  button#orderStatusUpdate.btn.btn-outline-success.float-left(type='submit', value='Submit')
+                    | Update
+                    | status
           li.list-group-item
             strong  Order date: 
             span.float-right
