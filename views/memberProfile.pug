@@ -7,6 +7,7 @@ block content
         .row.blk-pro
           .col-md-3
           .col-md-6
+            +flashMessages()
             img.img-circle.img-responsive.img-center(src='https://www.gravatar.com/avatar/fd63280d534e8130e0853148e7019db0?d=retro&s=200', alt='')
             br
             br
@@ -15,21 +16,26 @@ block content
               | #{user.firstName}
             br
             h6
-              b Last Name:
+              b Last Name: 
               |  #{user.lastName}
             br
             h6
-              b Email:
+              b Email: 
               | #{user.email}
             br
             h6
-              b Mobile Number:
+              b Mobile Number: 
               |  #{user.phone}
             br
             h6
-              | Address: #{user.address}
+              b Address: 
+              | #{user.address}
             br
-            a.btn.btn-primary(href='/users/edit-profile') Edit Profile
+            h6
+              b Date of birth: 
+              | #{user.dob || 'You haven\'t set your date of birth'}
+            br
+            a.btn.btn-primary(href='/users/edit-profile/'+user._id) Edit Profile
           .col-md-3
 
     

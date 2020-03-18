@@ -17,7 +17,11 @@ const Orderschema = new mongoose.Schema({
     type: Object,
     required: true
   },
-  orderNames: {
+  orderFirstName: {
+    type: String,
+    require: true
+  },
+  orderLastName: {
     type: String,
     require: true
   },
@@ -48,6 +52,10 @@ const Orderschema = new mongoose.Schema({
   orderPhone: Number,
   orderStatus: {
     type: String
+  },
+  orderComment: {
+    type: String,
+    required: true
   },
   orderDate: {
     type: Date,

@@ -18,7 +18,7 @@ module.exports = {
     }
   },
 
-  isNotUser: (req, res, next) => {
+  isNotAdmin: (req, res, next) => {
     if (req.isAuthenticated() && req.user.isAdmin == true) {
       req.flash("Danger", "You have no access");
       res.redirect('/admin/admin-home');

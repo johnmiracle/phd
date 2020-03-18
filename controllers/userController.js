@@ -1,7 +1,13 @@
 const bcrypt = require("bcryptjs");
-const { check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const passport = require("passport");
 const User = require("../models/User");
+const Order = require("../models/Order");
+const Cart = require("../models/cart");
+
+function currencyFormat(num) {
+  return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
 
 exports.memberRegister = async (req, res, next) => {
   const firstName = req.body.firstName;
@@ -19,11 +25,11 @@ exports.memberRegister = async (req, res, next) => {
     res.redirect("/login");
   }
 
-  check("firstName", "First name is required").notEmpty();
-  check("lastName", "Last name is required").notEmpty();
-  check("email", "email is required").isEmail();
-  check("phone", "Mobile Number is required").notEmpty();
-  check("password", "Passsword is required")
+  body("firstName", "First name is required").notEmpty();
+  body("lastName", "Last name is required").notEmpty();
+  body("email", "email is required").isEmail();
+  body("phone", "Mobile Number is required").notEmpty();
+  body("password", "Passsword is required")
     .trim()
     .notEmpty()
     .isLength({ min: 6 });
@@ -72,13 +78,87 @@ exports.memberProfile = (req, res, next) => {
 };
 
 exports.memberProfileEdit = (req, res, next) => {
-  res.render("profile-edit");
+  User.findById(req.params.id, function(err, user) {
+    if (err) return console.log(err);
+    res.render("profile-edit", { user });
+  });
+};
+
+exports.userProfileEdit = async (req, res, next) => {
+  const user = await User.findOne({
+    email: req.user.email
+  });
+
+  if (!user) {
+    if (req.apiAuthenticated) {
+      res.flash("danger", "User not found");
+      return;
+    }
+
+    req.flash("danger", err.message);
+    console.log(err);
+    res.redirect("/users/profile");
+    return;
+  }
+
+  const userData = {};
+  userData.firstName = req.body.first_name;
+  userData.lastName = req.body.last_name;
+  userData.address = req.body.address;
+  userData.phone = req.body.phone_number;
+  userData.dob = req.body.dob;
+
+  let query = { _id: req.params.id };
+
+  User.update(query, userData, function(err) {
+    // handle errors
+    if (err) {
+      req.flash("danger", err.message);
+      console.log(err);
+      res.redirect("/users/profile");
+    }
+    if (userData.User === req.body) {
+      res.redirect("/users/profile");
+      req.flash("Success", "User account updated");
+    } else {
+      // no errors, return success message
+      req.flash("Success", "User account updated");
+      // redirect to the add category view
+      res.redirect("/users/profile");
+    }
+  });
 };
 
 exports.order_page = (req, res, next) => {
-  res.render("orders_page");
+  Order.find({ user: req.user }, (err, orders) => {
+    if (err) {
+      res.flash("danger", "Error loading order, Please try again");
+      res.redirect("/users/orders");
+      return;
+    } else {
+      let orderProducts;
+      orders.forEach(function(order) {
+        orderProducts = new Cart(order.orderProducts);
+        order.items = orderProducts.generateArray();
+        console.log(order.orderProducts.items)
+      });
+      res.render("orders_page", { orders });
+    }
+  });
 };
 
-exports.view_order = (req, res, next) => {
-  res.render("order");
+exports.view_order = async (req, res, next) => {
+  const result = await Order.findById(req.params.id);
+
+  Order.find({ _id: req.params.id }, function(err, orders) {
+    let orderProducts;
+    orders.forEach(function(order) {
+      orderProducts = new Cart(order.orderProducts);
+      order.item = orderProducts.generateArray();
+      console.log(order.item);
+      console.log("miracle");
+      console.log(orderProducts);
+    });
+    res.render("order", { result, orders });
+  });
 };

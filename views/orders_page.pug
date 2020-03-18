@@ -3,6 +3,7 @@ include ./mixins/_flash-messages
 
 block content
     .container
+        +flashMessages()
         br
         .col-sm-12
             h2 Orders
@@ -16,37 +17,43 @@ block content
                     | status
                 a.hidden-xs.btn.btn-outline-warning(href='/users/orders')
                     i.fa.fa-search
-        .orderFilter
-            .row
-                .text-warning.top-pad-10.col-sm-8
-                    | Orders can be filtered by: surname, email
-                    | address or
-                    | postcode/zipcode
-                .col-sm-4.top-pad-10
-                    form.form-inline.float-sm-right
-                    select#orderStatusFilter.form-control
-                        option Completed
-                        option Paid
-                        option Created
-                        option Cancelled
-                        option Declined
-                        option Shipped
-                        option Pending
+            .orderFilter
+                .row
+                    .text-warning.top-pad-10.col-sm-8
+                        | Orders can be filtered by: surname, email
+                        | address or
+                        | postcode/zipcode
+                    .col-sm-4.top-pad-10
+                        form.form-inline.float-sm-right
+                        select#orderStatusFilter.form-control
+                            option Completed
+                            option Paid
+                            option Created
+                            option Cancelled
+                            option Declined
+                            option Shipped
+                            option Pending
         .col-sm-12.top-pad-10
             ul.list-group
                 li.list-group-item
                     strong Recent orders
-                li.list-group-item
-                    .float-right.top-pad-5
-                        h6 Status: Paid
-                    .top-pad-5
-                        a.text-success(href='/users/order/view/5e3eba8baa056411043e9f87') View order
-                        |  
-                        span.text-info Order id: 
-                            b 235453565856 | 
-                        span.text-info Date Ordered: 
-                            b 09/02/2020 12:11 | 
-                        span.text-info Total: 
-                            b 18,000
-                        
-        br
+                if (orders.length > 0)
+                    each order in orders
+                        li.list-group-item
+                            .float-right.top-pad-5
+                                h6 Status: #{order.orderStatus}
+                            .top-pad-5
+                                a.text-success(href='/users/order/view/'+order._id) 
+                                    b  View order 
+                                span.text-info  
+                                    b Order id: #{order.orderPaymentId} | 
+                                span.text-info
+                                    b Date Ordered: #{order.orderDate} | 
+                                span.text-info  
+                                    b Total: #{order.orderProducts.totalPrice}        
+                else
+                    .card-content
+                        center.p-5
+                            h2
+                                | Order empty
+            br

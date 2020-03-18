@@ -323,7 +323,6 @@ exports.all_Orders = (req, res, next) => {
 };
 exports.view_Order = async (req, res, next) => {
   const result = await Order.findById(req.params.id).populate("user");
-  console.log(result);
   res.render("admin_Order", { result });
 };
 
@@ -339,10 +338,6 @@ exports.order_update = (req, res) => {
       req.flash("danger", err.message);
       console.log(err);
       res.redirect("/admin/orders");
-    }
-    if (product.Product === req.body) {
-      res.redirect("/admin/orders");
-      req.flash("Success", "Order has been updated Successfully");
     } else {
       // no errors, return success message
       req.flash("Success", "Order has been updated Successfully");

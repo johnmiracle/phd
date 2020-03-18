@@ -1,11 +1,13 @@
 extends ./layout/mainlayout
 include ./mixins/_flash-messages
+  - function(){}
 
 
 block content
   section
       .container
         .shopping-cart
+          +flashMessages()
           if (products.length > 0)
             h3 Cart
             .column-labels
@@ -36,7 +38,7 @@ block content
             .totals
               .totals-item
                 label Tax (5%)
-                #cart-tax.totals-value  #{`${tax}`}
+                #cart-tax.totals-value  5%
               .totals-item
                 label Shipping
                 #cart-shipping.totals-value 15.00

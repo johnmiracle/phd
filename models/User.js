@@ -3,17 +3,17 @@ const mongoose = require("mongoose");
 const Userschema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: "Please this field is required",
+    required: [true, "Please this field is required"],
     trim: true
   },
   lastName: {
     type: String,
-    required: "Please this field is required",
+    required: [true, "Please this field is required"],
     trim: true
   },
   email: {
     type: String,
-    required: "please this field is required",
+    required: [true, "please this field is required"],
     unique: true
   },
   phone: {
@@ -22,11 +22,15 @@ const Userschema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: "Please this field is required"
+    required: [true, "Please this field is required"]
   },
   isAdmin: {
     type: Boolean,
     default: false
+  },
+  dob: {
+    type: Date,
+    required: [true, "Date of birth must be provided"]
   },
   address: String,
   audience: String,
