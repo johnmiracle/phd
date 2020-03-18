@@ -33,7 +33,7 @@ exports.memberRegister = async (req, res, next) => {
     .trim()
     .notEmpty()
     .isLength({ min: 6 });
-  check("address", "Address is required").notEmpty();
+  body("address", "Address is required").notEmpty();
 
   let err = validationResult(req.body);
 
@@ -58,13 +58,6 @@ exports.memberRegister = async (req, res, next) => {
           req.flash("success", "Registration is successfull, Please Login");
           res.redirect("/login");
         }
-        (req, res, next) => {
-          if (req.session.oldUrl) {
-            const oldUrl = req.session.oldUrl;
-            req.session.oldUrl = null;
-            res.redirect(oldUrl);
-          }
-        };
       });
     });
   }

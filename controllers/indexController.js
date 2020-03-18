@@ -5,17 +5,12 @@ const passport = require("passport");
 const Cart = require("../models/cart");
 const paypal = require("paypal-rest-sdk");
 const axios = require("axios").default;
-const curl = new (require("curl-request"))();
 
 paypal.configure({
   mode: "sandbox", //sandbox or live
   client_id: "AQ1RbFqSEoUaR6Rwnf7EsIR5WI-mtnvX65u278qLaZECVIRZ_RNydua9Hy8WucTH8N-semXyEyslvJlz",
   client_secret: "ECqZMxWWkjCU5aRO4h05-Nkl0D8mmj5Q5xtH3j3RcpWOdeA5BQU9oLv0Vqjm-yic5_8E1CvT1T7xDXTu"
 });
-
-function currencyFormat(num) {
-  return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
 
 exports.home = (req, res, next) => {
   res.render("index");
@@ -27,7 +22,7 @@ exports.banner = (req, res, next) => {
 
 exports.brouchures = async (req, res, next) => {
   const product = await Category.findById(req.params.id);
-  const products = await Product.find({ category: "5e1d9f48bf4cfc1f581246fd" }).populate("category");
+  const products = await Product.find({ category: "5e722a003a5d242b20835856" }).populate("category");
   res.render("brouchures", { products });
 };
 
@@ -44,7 +39,7 @@ exports.addCart = (req, res, next) => {
     }
     cart.add(product, product.id);
     req.session.cart = cart;
-    req.flash("Success", "Added to cart.");
+    console.log(cart);
     res.redirect("/");
   });
 };
@@ -392,17 +387,18 @@ exports.payStack = (req, res, next) => {
         orderStatus: "Payment Successful",
         orderComment: req.body.shipOrderComment,
         orderDate: new Date(),
-        cart: req.session.cart
+        orderProducts: req.session.cart
       });
 
       orderDoc.save(err => {
         if (err) {
           console.info(err.stack);
+        } else {
+          // handle success
+          res.redirect(response.data.data.authorization_url);
+          return;
         }
       });
-      // handle success
-      res.redirect(response.data.data.authorization_url);
-      return;
     })
     .catch(function(error) {
       // handle error
@@ -420,13 +416,14 @@ exports.payment_return = (req, res, next) => {
 
   axios({
     method: "get",
-    url: "https://api.paystack.co/transaction/verify/:ref"
-    // header: {
-    //   Authorization: "Bearer sk_test_0f4739f07602bd0b19d4d938fe61348ba9344537"
-    // },
-    // data: {
-    //   reference: ref
-    // }
+    url: "https://api.paystack.co/transaction/verify/:ref", 
+    
+    header: {
+      Authorization: "Bearer sk_test_0f4739f07602bd0b19d4d938fe61348ba9344537"
+    },
+    data: {
+      reference: ref
+    }
   })
     .then(response => {
       console.log(response);
@@ -440,22 +437,22 @@ exports.payment_return = (req, res, next) => {
       return;
     });
 
-  // let order = [];
-  // order.orderStatus = req.body.status;
+  let order = [];
+  order.orderStatus = req.body.status;
 
-  // let query = { orderPaymentId: ref };
+  let query = { orderPaymentId: ref };
 
-  // Order.update(query, order, function(err) {
-  //   // handle errors
-  //   if (err) {
-  //     req.flash("danger", err.message);
-  //     console.log(err);
-  //     res.redirect("");
-  //   }
-  // });
+  Order.update(query, order, function(err) {
+    // handle errors
+    if (err) {
+      req.flash("danger", err.message);
+      console.log(err);
+      res.redirect("");
+    }
+  });
 
   // set cart to empty
-  // req.session.cart = null;
+  req.session.cart = null;
 
   res.render("order_successful", { ref });
   return;

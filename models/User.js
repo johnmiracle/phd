@@ -29,8 +29,7 @@ const Userschema = new mongoose.Schema({
     default: false
   },
   dob: {
-    type: Date,
-    required: [true, "Date of birth must be provided"]
+    type: Date
   },
   address: String,
   audience: String,

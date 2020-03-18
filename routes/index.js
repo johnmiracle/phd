@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const indexController = require("../controllers/indexController");
 const { isLogIn, isNotAdmin } = require("../controllers/authController");
-const curl = new (require("curl-request"))();
 
 /* GET home page. */
 router.get("/", isNotAdmin, indexController.home);
