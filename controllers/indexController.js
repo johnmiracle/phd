@@ -22,7 +22,7 @@ exports.banner = (req, res, next) => {
 
 exports.brouchures = async (req, res, next) => {
   const product = await Category.findById(req.params.id);
-  const products = await Product.find({ category: "5e722a003a5d242b20835856" }).populate("category");
+  const products = await Product.find({}).populate("category");
   res.render("brouchures", { products });
 };
 
@@ -417,7 +417,7 @@ exports.payment_return = (req, res, next) => {
   axios({
     method: "get",
     url: "https://api.paystack.co/transaction/verify/:ref", 
-    
+
     header: {
       Authorization: "Bearer sk_test_0f4739f07602bd0b19d4d938fe61348ba9344537"
     },
