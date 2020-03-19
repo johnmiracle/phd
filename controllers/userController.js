@@ -133,7 +133,6 @@ exports.order_page = (req, res, next) => {
       orders.forEach(function(order) {
         orderProducts = new Cart(order.orderProducts);
         order.items = orderProducts.generateArray();
-        console.log(order.orderProducts.items)
       });
       res.render("orders_page", { orders });
     }
@@ -148,9 +147,6 @@ exports.view_order = async (req, res, next) => {
     orders.forEach(function(order) {
       orderProducts = new Cart(order.orderProducts);
       order.item = orderProducts.generateArray();
-      console.log(order.item);
-      console.log("miracle");
-      console.log(orderProducts);
     });
     res.render("order", { result, orders });
   });

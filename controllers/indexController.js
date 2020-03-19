@@ -359,7 +359,7 @@ exports.payStack = (req, res, next) => {
       Authorization: process.env.paystack_secret_key
     },
     data: {
-      amount: cart.totalPrice,
+      amount: cart.totalPrice * 100,
       email: req.body.shipEmail,
       first_name: req.body.shipFirstname,
       last_name: req.body.shipLastName,
@@ -384,7 +384,8 @@ exports.payStack = (req, res, next) => {
         orderState: req.body.shipState,
         orderPostcode: req.body.shipPostcode,
         orderPhone: req.body.shipPhoneNumber,
-        orderStatus: "Payment Successful",
+        orderStatus: "",
+        orderGatewayResponse: "",
         orderComment: req.body.shipOrderComment,
         orderDate: new Date(),
         orderProducts: req.session.cart
@@ -412,48 +413,45 @@ exports.payStack = (req, res, next) => {
 
 exports.payment_return = (req, res, next) => {
   const cart = new Cart(req.session.cart);
-  const ref = req.query.reference;
+  const reference = req.query.reference;
 
-  axios({
-    method: "get",
-    url: "https://api.paystack.co/transaction/verify/:ref", 
+  const url = "https://api.paystack.co/transaction/verify/" + reference;
 
-    header: {
-      Authorization: "Bearer sk_test_0f4739f07602bd0b19d4d938fe61348ba9344537"
-    },
-    data: {
-      reference: ref
-    }
-  })
+  return axios
+    .get(url, {
+      headers: {
+        Authorization: process.env.paystack_secret_key
+      },
+      data: {
+        reference: reference
+      }
+    })
     .then(response => {
-      console.log(response);
-      return;
+      let order = [];
+      order.orderStatus = response.data.data.gateway_response;
+      order.orderGatewayResponse = response.data.data.gateway_response;
+
+      console.log(response.data.data.gateway_response);
+      let query = { orderPaymentId: reference };
+
+      Order.update(query, order, function(err) {
+        // handle errors
+        if (err) {
+          req.flash("danger", err.message);
+          console.log(err);
+          res.redirect("");
+        }
+        // set cart to empty
+        req.session.cart = null;
+        res.render("order_successful", { reference });
+        return;
+      });
     })
     .catch(function(error) {
       // handle error
-      req.flash("Danger", "There was an error processing your payment. You have not been changed and can try again.");
+      req.flash("Danger", "There was an error verifying your payment.");
       res.redirect("/checkout");
       console.log(error);
       return;
     });
-
-  let order = [];
-  order.orderStatus = req.body.status;
-
-  let query = { orderPaymentId: ref };
-
-  Order.update(query, order, function(err) {
-    // handle errors
-    if (err) {
-      req.flash("danger", err.message);
-      console.log(err);
-      res.redirect("");
-    }
-  });
-
-  // set cart to empty
-  req.session.cart = null;
-
-  res.render("order_successful", { ref });
-  return;
 };

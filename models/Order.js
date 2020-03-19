@@ -53,9 +53,11 @@ const Orderschema = new mongoose.Schema({
   orderStatus: {
     type: String
   },
+  orderGatewayResponse: {
+    type: String
+  },
   orderComment: {
-    type: String,
-    required: true
+    type: String
   },
   orderDate: {
     type: Date,
