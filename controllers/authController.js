@@ -21,19 +21,18 @@ module.exports = {
   isNotAdmin: (req, res, next) => {
     if (req.isAuthenticated() && req.user.isAdmin == true) {
       req.flash("Danger", "You have no access");
-      res.redirect('/admin/admin-home');
+      res.redirect("/admin/admin-home");
     } else {
       next();
     }
   },
 
   isAdmin: (req, res, next) => {
-
     if (req.user.isAdmin == true) {
       next();
     } else {
       req.flash("Danger", "You have no access");
-      res.redirect('/users /member-home');
+      res.redirect("/users/member-home");
     }
   }
 };
