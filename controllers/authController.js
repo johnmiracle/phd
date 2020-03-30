@@ -32,7 +32,7 @@ module.exports = {
       next();
     } else {
       req.flash("Danger", "You have no access");
-      res.redirect("/users/member-home");
+      res.redirect("/");
     }
   }
 };

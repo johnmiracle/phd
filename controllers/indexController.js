@@ -349,7 +349,7 @@ exports.checkout_return = (req, res, next) => {
   });
 };
 
-exports.payStack = (req, res, next) => {
+exports.payStack = async (req, res, next) => {
   const cart = new Cart(req.session.cart);
   axios({
     method: "post",
